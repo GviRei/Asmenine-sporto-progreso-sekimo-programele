@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.gvidas.sportapplication.com.example.gvidas.activities.MainActivity">
+
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/action_profile"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_calendar"
+        android:orderInCategory="101"
+        android:title="Calendar"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_createWorkout"
+        android:orderInCategory="102"
+        android:title="Create workout"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_createExercise"
+        android:orderInCategory="103"
+        android:title="Create exercise"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_measureVO2Max"
+        android:orderInCategory="104"
+        android:title="Measure VO2Max"
+        app:showAsAction="never" />
+
+</menu>

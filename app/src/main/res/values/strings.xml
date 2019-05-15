@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Sport application</string>
+    <string name="action_profile">Profile</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_create_workout">CreateWorkoutActivity</string>
+    <string name="title_activity_create_exercise">CreateExerciseActivity</string>
+    <string name="title_activity_vo2_max">VO2MaxActivity</string>
+    <string name="title_activity_test">testActivity</string>
+    <string name="title_activity_profile_show">ProfileShowActivity</string>
+</resources>

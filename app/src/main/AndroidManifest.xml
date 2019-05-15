@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.gvidas.sportapplication">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.example.gvidas.activities.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.gvidas.activities.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.CalendarActivity"
+            android:label="@string/title_activity_calendar"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.CreateWorkoutActivity"
+            android:label="@string/title_activity_create_workout"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.CreateExerciseActivity"
+            android:label="@string/title_activity_create_exercise"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.VO2MaxActivity"
+            android:label="@string/title_activity_vo2_max"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".testActivity"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.ProfileShowActivity"
+            android:label="@string/title_activity_profile_show"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>
