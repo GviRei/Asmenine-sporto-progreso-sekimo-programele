@@ -5,14 +5,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.util.Log;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.example.gvidas.sportapplication.R;
 
 
 public class MyDBHandler extends SQLiteOpenHelper {
@@ -28,7 +25,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String EXERCISE_SETS = "ExerciseSets";
     public static final String EXERCISE_REPS = "ExerciseReps";
 
-    //Workout table
+    //Workout plan table
     public static final String TABLE_WORKOUT = "Workout";
     public static final String WORKOUT_ID = "WorkoutID";
     public static final String WORKOUT_NAME = "WorkoutName";
@@ -50,11 +47,36 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String TWORKOUT_LINK = "TWorkoutID";
     public static final String TEXERCISE_SETS = "TExerciseSets";
     public static final String TEXERCISE_REPS = "TExerciseReps";
+    public static final String TEXERCISE_WEIGHT = "TExerciseWeight";
+
+    //Finished workout data table
+    public static final String TABLE_WORKOUTDONE = "WorkoutDone";
+    public static final String WORKOUTDONE_ID = "WorkoutDoneID";
+    public static final String WORKOUTDONE_RANDID = "WorkoutDoneRandID"; //ID which is used to group all rows for one workout
+    public static final String WORKOUTDONE_TIREDNESS = "TirednessLevel";
+    public static final String WORKOUTDONE_ENERGY = "EnergyLevel";
+
+    //Relationship table between exercises and workoutdone tables
+    public static final String TABLE_WEXERCISEDONE = "Exercise_WorkoutDone";
+    public static final String WEXERCISE_LINK = "WExerciseID";
+    public static final String WWORKOUTDONE_LINK = "WWorkoutDoneID";
+
+
 
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
+
+    public static final String CREATE_TABLE_WORKOUTDONE =
+            "CREATE TABLE " + TABLE_WORKOUTDONE + "(" + WORKOUTDONE_ID +
+                    " INTEGER PRIMARY KEY," + WORKOUTDONE_RANDID + " INTEGER," +
+                    WORKOUTDONE_TIREDNESS + " INTEGER," +
+                    WORKOUTDONE_ENERGY + " INTEGER" + ")";
+
+
+
+
 
     private static final String CREATE_TABLE_EXERCISE =
             "CREATE TABLE " + TABLE_EXERCISE + "(" + EXERCISE_ID +
@@ -69,23 +91,19 @@ public class MyDBHandler extends SQLiteOpenHelper {
             "CREATE TABLE " + TABLE_WORKOUT + "(" + WORKOUT_ID +
                     " INTEGER PRIMARY KEY," + WORKOUT_NAME + " TEXT )";
 
-  /*  private static final String CREATE_TABLE_TRAININGEXERCISE = "CREATE TABLE " + TABLE_TRAININGEXERCISE + "("
-            + TEXERCISE_ID + " INTEGER," + TWORKOUT_ID + " INTEGER," + "FOREIGN KEY (TExerciseID) REFERENCES " + TABLE_EXERCISE + " (ExerciseID)," +
-            " FOREIGN KEY (TWorkoutID) REFERENCES " + TABLE_WORKOUT + " (WorkoutID))";
-*/
-
     private static final String CREATE_TABLE_TRAININGEXERCISE =
             "CREATE TABLE " + TABLE_TRAININGEXERCISE + "(" +
                     TWORKOUT_LINK + " INTEGER," +
                     TEXERCISE_LINK + " INTEGER," +
                     TEXERCISE_SETS + " INTEGER," +
                     TEXERCISE_REPS + " INTEGER," +
+                    TEXERCISE_WEIGHT + " INTEGER," +
 
                     "FOREIGN KEY (" + TWORKOUT_LINK + ") " +
                     "REFERENCES " + TABLE_WORKOUT + " (" + WORKOUT_ID + ")," +
 
                     " FOREIGN KEY (" + TEXERCISE_LINK + ") " +
-                    "REFERENCES " + TABLE_EXERCISE+ " (" + EXERCISE_ID + ") )";
+                    "REFERENCES " + TABLE_EXERCISE + " (" + EXERCISE_ID + ") )";
 
     @Override
     public void onConfigure(SQLiteDatabase db) {
@@ -99,6 +117,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_PROFILE);
         db.execSQL(CREATE_TABLE_WORKOUT);
         db.execSQL(CREATE_TABLE_TRAININGEXERCISE);
+        db.execSQL(CREATE_TABLE_WORKOUTDONE);
     }
 
 
@@ -147,15 +166,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
 
- /* public void addExerciseToWorkout(TrainingExercise exercise) {
-      ContentValues values = new ContentValues();
-      values.put(TEXERCISE_ID, exercise.getTExerciseID());
-      values.put(TWORKOUT_ID, exercise.getTWorkoutID());
-      SQLiteDatabase db = this.getWritableDatabase();
-      db.insert(TABLE_TRAININGEXERCISE, null, values);
-      db.close();
-  }*/
-
     //Add record to database
     public void addExercise(Exercise exercise) {
 
@@ -176,71 +186,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return db.insert(TABLE_EXERCISE, null, cv);
     }
 
-   /* public long addExcerciseToWorkout(long workoutid, long exerciseid, long sets, long reps) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(TWORKOUT_LINK, workoutid);
-        cv.put(TEXERCISE_LINK, exerciseid);
-        cv.put(TEXERCISE_SETS, sets);
-        cv.put(TEXERCISE_REPS, reps);
-        return db.insert(TABLE_TRAININGEXERCISE, null, cv);
-    }*/
-
-    //Adding exercises to workout plan
-   /* public void addManyExcercisesToWorkout(long workoutid, ArrayList<Long> exerciseids, long sets, long reps) {
-        ArrayList<Long> rv = new ArrayList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.beginTransaction();
-        for (Long l: exerciseids) {
-            long thisid = addExcerciseToWorkout(workoutid,l, sets, reps);
-        }
-        db.setTransactionSuccessful();
-        db.endTransaction();
-    }*/
-
 
     public long addWorkout(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(WORKOUT_NAME,name);
-        return db.insert(TABLE_WORKOUT,null,cv);
-    }
-    public void logAllWorkoutsWithExcercises() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        //<<<<<<<<<< column name aliases (not required but desireable as they can be quite cumbersome) >>>>>>>>>>
-        String workoutname_column_alias = "thisworkoutname";
-        String concantenated_exercises_alias = "all_exercises";
-
-        String tables = TABLE_WORKOUT +
-                " JOIN " + TABLE_TRAININGEXERCISE + " ON " + TABLE_WORKOUT + "." + WORKOUT_ID + "="  + TWORKOUT_LINK +
-                " JOIN " + TABLE_EXERCISE + " ON " + TEXERCISE_LINK +  "=" + TABLE_EXERCISE + "." + EXERCISE_ID;
-        String[] columns = new String[]{
-                TABLE_WORKOUT + "." + WORKOUT_NAME + " AS " + workoutname_column_alias,
-                "'\n\tEXERCISES: '||group_concat(" +
-                        TABLE_EXERCISE + "." + EXERCISE_NAME +
-                        ") AS " + concantenated_exercises_alias
-        };
-        String groupby = TABLE_WORKOUT + "." + WORKOUT_ID;
-        // Query resolves to :-
-        /*
-            SELECT
-                workout.workour_name AS thisworkoutname,
-                'EXERCISES: '||group_concat(exersise.exercise_name) AS all_exercises
-            FROM workout
-                JOIN training_excercise ON  workout.WorkoutID=TWorkoutID
-                JOIN exersise ON TExerciseID=exersise.ExerciseID
-                GROUP BY workout.WorkoutID
-        */
-        Cursor csr = db.query(tables,columns,null,null,groupby,null,null);
-        while (csr.moveToNext()) {
-            Log.d(
-                    "MYDATA",
-                    "Workout: " +
-                            csr.getString(csr.getColumnIndex(workoutname_column_alias)) +
-                            csr.getString(csr.getColumnIndex(concantenated_exercises_alias))
-            );
-        }
-        csr.close();
+        cv.put(WORKOUT_NAME, name);
+        return db.insert(TABLE_WORKOUT, null, cv);
     }
 
     //Add profile data to database
@@ -347,29 +298,34 @@ public class MyDBHandler extends SQLiteOpenHelper {
         cursor.close();
         String[] allSpinner = new String[spinnerContent.size()];
         allSpinner = spinnerContent.toArray(allSpinner);
-        //db.close();
+        db.close();
 
         return allSpinner;
     }
 
-    /*public String[] getAllSpinnerContent(){
-
-        String query = "Select * from content";
-        Cursor cursor = this.getDbConnection().rawQuery(query, null);
+    //Load workout data from database
+    public String[] loadWorkoutPlan2() {
+        String result = "";
+        String query = "SELECT*FROM " + TABLE_WORKOUT;
+        SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<String> spinnerContent = new ArrayList<String>();
-        if(cursor.moveToFirst()){
-            do{
-                String word = cursor.getString(cursor.getColumnIndexOrThrow("content"));
-                spinnerContent.add(word);
-            }while(cursor.moveToNext());
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            int result_0 = cursor.getInt(0);
+            String result_1 = cursor.getString(1);
+            spinnerContent.add(result_1);
+            //result += String.valueOf(result_0) + " " + result_1 + System.getProperty("line.separator");
+            result += String.valueOf(result_1);
         }
-        cursor.close();
 
+        cursor.close();
         String[] allSpinner = new String[spinnerContent.size()];
         allSpinner = spinnerContent.toArray(allSpinner);
+        db.close();
 
         return allSpinner;
-    }*/
+    }
+
     public String loadProfile() {
         String result = "";
         String selectQuery = "SELECT * FROM " + TABLE_PROFILE;
@@ -386,6 +342,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
     public String loadWorkoutPlan(int id) {
         String result = "";
         String query = "SELECT w.WorkoutName, e.ExerciseName, te.TExerciseSets, te.TExerciseReps FROM "
@@ -397,15 +354,41 @@ public class MyDBHandler extends SQLiteOpenHelper {
                 " JOIN " +
                 TABLE_WORKOUT +
                 " AS w" + " ON w.WorkoutID = te.TWorkoutID" +
-                " WHERE ? = te.TWorkoutID" ;
+                " WHERE ? = te.TWorkoutID";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)},  null);
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)}, null);
         while (cursor.moveToNext()) {
             String result_0 = cursor.getString(0);
             String result_1 = cursor.getString(1);
             String result_2 = cursor.getString(2);
             String result_3 = cursor.getString(3);
-            result += String.valueOf(result_0) + " " + String.valueOf(result_1) + " " + String.valueOf(result_2)+ "x" + String.valueOf(result_3) + System.getProperty("line.separator");
+            result += String.valueOf(result_0) + " " + String.valueOf(result_1) + " " + String.valueOf(result_2) + "x" + String.valueOf(result_3) + System.getProperty("line.separator");
+        }
+        cursor.close();
+        db.close();
+        return result;
+    }
+
+    public String loadWorkoutPlanOnlyExercises(int id) {
+        String result = "";
+        String query = "SELECT w.WorkoutName, e.ExerciseName, te.TExerciseSets, te.TExerciseReps FROM "
+                + TABLE_EXERCISE
+                + " AS e " +
+                " JOIN " +
+                TABLE_TRAININGEXERCISE +
+                " AS te" + " ON e.ExerciseID = te.TExerciseID" +
+                " JOIN " +
+                TABLE_WORKOUT +
+                " AS w" + " ON w.WorkoutID = te.TWorkoutID" +
+                " WHERE ? = te.TWorkoutID";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)}, null);
+        while (cursor.moveToNext()) {
+            String result_0 = cursor.getString(0);
+            String result_1 = cursor.getString(1);
+            String result_2 = cursor.getString(2);
+            String result_3 = cursor.getString(3);
+            result +=  String.valueOf(result_1) + " ";
         }
         cursor.close();
         db.close();

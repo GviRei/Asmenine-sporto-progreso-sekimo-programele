@@ -46,6 +46,14 @@
         <activity
             android:name="com.example.gvidas.activities.ProfileShowActivity"
             android:label="@string/title_activity_profile_show"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.StartWorkoutActivity"
+            android:label="@string/title_activity_start_workout"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.WorkoutActivity"
+            android:label="@string/title_activity_workout"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

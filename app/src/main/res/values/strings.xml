@@ -8,4 +8,6 @@
     <string name="title_activity_vo2_max">VO2MaxActivity</string>
     <string name="title_activity_test">testActivity</string>
     <string name="title_activity_profile_show">ProfileShowActivity</string>
+    <string name="title_activity_start_workout">StartWorkoutActivity</string>
+    <string name="title_activity_workout">WorkoutActivity</string>
 </resources>

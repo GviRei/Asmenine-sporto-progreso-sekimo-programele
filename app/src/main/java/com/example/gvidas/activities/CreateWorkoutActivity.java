@@ -30,19 +30,8 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 
     Spinner spinner;
     EditText workoutName;
-    private ArrayAdapter<String> listAdapter;
-    // public ArrayList<ExerciseInPlan> exerciseList;
-    public ArrayList<ExerciseInPlan> exerciseList = new ArrayList<ExerciseInPlan>();
-    public ArrayList<String> exerciseInPlan = new ArrayList<String>();
-    ArrayList<String> excercises = new ArrayList<>();
-    ArrayList<Long> abdomen_excercises = new ArrayList<>();
-    ArrayList<Long> everything_excercises = new ArrayList<>();
-    String[] allexcercises = new String[]{};
-    // Note assume that hump is id 1, lug id 2 etc
-    String[] allworkouts = new String[]{"Chest", "Abdomen", "Everything"};
     int sets = 0;
     int reps = 0;
-    int workoutId = 1;
     MyDBHandler dbHandler;
 
     @Override
@@ -128,25 +117,6 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         repsView.setText(String.valueOf(number));
     }
 
-    public ArrayList addExerciseToList() {
-        TextView list = (TextView) findViewById(R.id.workoutList);
-        ExerciseInPlan exercise = new ExerciseInPlan();
-        String exerciseName = "";
-        int intSets = 0;
-        int intReps = 0;
-        EditText sets = (EditText) findViewById(R.id.sets);
-        EditText reps = (EditText) findViewById(R.id.reps);
-        exerciseName = spinner.getSelectedItem().toString();
-        //  intSets = Integer.parseInt(sets.getText().toString());
-        // intReps = Integer.parseInt(reps.getText().toString());
-        excercises.add(new String(exerciseName));
-        //  StringBuilder builder = new StringBuilder();
-       /* for (ExerciseInPlan smth : exerciseList) {
-            builder = builder.append(smth.exerciseName + " " + smth.sets + "x" + smth.reps + "\n");
-        }
-        list.setText(builder.toString());*/
-        return excercises;
-    }
 
     //Add workout plan name to database
     public void addWorkoutToDatabase(View view) {
@@ -166,24 +136,9 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         /*String str = dbHandler.loadWorkoutPlan(workoutPlanId);
         String[] splitted = str.split("\\s+");*/
-
         list.setText(dbHandler.loadWorkoutPlan(workoutPlanId));
     }
 
-
-
-   /* public void addExercise(View view) {
-        Random randId = new Random();
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        // int id = Integer.parseInt(random.getText().toString());
-        int id = randId.nextInt(1000 + 1);
-        String name = exerciseName.getText().toString();
-        String category = exerciseCategory.getText().toString();
-        Exercise exercise = new Exercise(id, name, category);
-        dbHandler.addExercise(exercise);
-        exerciseName.setText("");
-        exerciseCategory.setText("");
-    }*/
 
     public void addExerciseToDatabase(View view) {
         TextView list = (TextView) findViewById(R.id.workoutList);
@@ -199,25 +154,6 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         dbHandler.addExerciseToWorkout(exercise);
         list.setText(String.valueOf(workoutPlanId));
     }
-  /*  public void addWorkout(View view) {
-        Random randId = new Random();
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        // int id = Integer.parseInt(random.getText().toString());
-        int id = randId.nextInt(1000 + 1);
-        String name = workoutName.getText().toString();
-        String category = exerciseCategory.getText().toString();
-        Workout workout = new Workout(id, name, category);
-        dbHandler.addExercise(exercise);
-        exerciseName.setText("");
-        exerciseCategory.setText("");
-    }
-
-    public void loadWorkout(View view) {
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        list.setText(dbHandler.loadExercise2());
-        exerciseName.setText("");
-        exerciseCategory.setText("");
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

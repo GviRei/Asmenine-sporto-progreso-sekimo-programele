@@ -15,6 +15,7 @@ import com.example.gvidas.sportapplication.R;
 public class ProfileShowActivity extends AppCompatActivity {
 
     TextView name, age, height, weight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class ProfileShowActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void loadProfile() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         String str = dbHandler.loadProfileData();
