@@ -2,6 +2,15 @@ package com.example.gvidas.database;
 
 public class EditModel {
     private String editTextValue;
+    private String changeTextViewValue;
+
+    public String getChangeTextViewValue() {
+        return changeTextViewValue;
+    }
+
+    public void setChangeTextViewValue(String changeTextViewValue) {
+        this.changeTextViewValue = changeTextViewValue;
+    }
 
     public String getEditTextValue() {
         return editTextValue;

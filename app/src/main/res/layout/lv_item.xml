@@ -5,27 +5,27 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/textLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/exerciseTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:textColor="#000"
-            android:id="@+id/exerciseTextView"
-            />
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#000" />
 
         <EditText
+            android:id="@+id/editid"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/editid"
             android:layout_marginTop="10dp"
+            android:hint="Weight"
             android:paddingLeft="10dp"
-            android:textColor="#000"
-            android:hint ="Weight"
-            />
+            android:textColor="#000" />
 
     </LinearLayout>
 
@@ -34,6 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorAccent"/>
+        android:background="@color/colorAccent" />
 
 </LinearLayout>

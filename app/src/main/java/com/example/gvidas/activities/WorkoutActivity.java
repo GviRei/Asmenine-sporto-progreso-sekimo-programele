@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,12 +31,15 @@ public class WorkoutActivity extends AppCompatActivity {
 
     String workoutPlanName = "";
     private ListView lv;
-   // private CustomeAdapter customeAdapter;
+
+    // private CustomeAdapter customeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
+        LinearLayout container = (LinearLayout) findViewById(R.id.linearLayout);
+        //TextView textView = (TextView)
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //  ListView listOfExercises = (ListView) findViewById(R.id.exerciseList);
         setSupportActionBar(toolbar);
@@ -47,18 +51,13 @@ public class WorkoutActivity extends AppCompatActivity {
             workoutPlanName = extras.getString("key");
         }
         name.setText(workoutPlanName);
-        setTitle(workoutPlanName);
 
-        //TextView text = (TextView) findViewById(R.id.workoutPlanName2);
-        //text.setText(workoutPlanName.toString());
         CustomeAdapter customeAdapter;
         lv = (ListView) findViewById(R.id.listView);
 
-        customeAdapter.
         editModelArrayList = populateList();
         customeAdapter = new CustomeAdapter(this, editModelArrayList);
         lv.setAdapter(customeAdapter);
-        //   getWorkoutPlan();
         addEditText();
     }
 
@@ -66,10 +65,14 @@ public class WorkoutActivity extends AppCompatActivity {
         int count = getCount();
 
         ArrayList<EditModel> list = new ArrayList<>();
-
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        int workoutPlanId = dbHandler.getWorkoutPlanId(workoutPlanName);
+        String str = dbHandler.loadWorkoutPlanOnlyExercises(workoutPlanId);
+        String[] exercises = str.split(" ");
         for (int i = 0; i < count; i++) {
             EditModel editModel = new EditModel();
             //editModel.setEditTextValue(String.valueOf(i));
+            editModel.setChangeTextViewValue(exercises[i]);
             list.add(editModel);
         }
 
@@ -103,7 +106,7 @@ public class WorkoutActivity extends AppCompatActivity {
         String[] exercises = str.split(" ");
         final List<String> listas = new ArrayList<String>(Arrays.asList(exercises));
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-         (this, android.R.layout.simple_list_item_1, listas);
+                (this, android.R.layout.simple_list_item_1, listas);
         //listOfExercises.setAdapter(arrayAdapter);
 
     }

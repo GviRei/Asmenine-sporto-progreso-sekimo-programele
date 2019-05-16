@@ -73,9 +73,7 @@ public class CustomeAdapter extends BaseAdapter  {
         }
 
         holder.editText.setText(editModelArrayList.get(position).getEditTextValue());
-        WorkoutActivity activity = new WorkoutActivity();
-        String b = activity.getTitle().toString();
-        holder.textView.setText(b);
+        holder.textView.setText(editModelArrayList.get(position).getChangeTextViewValue());
 
         holder.editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -91,6 +89,23 @@ public class CustomeAdapter extends BaseAdapter  {
 
             @Override
             public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        holder.textView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                editModelArrayList.get(position).setChangeTextViewValue(holder.textView.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
 
             }
         });
