@@ -1,4 +1,4 @@
-package com.example.gvidas.activities;
+package com.example.gvidas.Classes;
 
 import android.content.Context;
 import android.text.Editable;

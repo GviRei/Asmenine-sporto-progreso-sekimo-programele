@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.gvidas.Classes.CustomeAdapter;
 import com.example.gvidas.Classes.EditModel;
 import com.example.gvidas.database.MyDBHandler;
 import com.example.gvidas.database.WorkoutDone;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static com.example.gvidas.activities.CustomeAdapter.editModelArrayList;
+import static com.example.gvidas.Classes.CustomeAdapter.editModelArrayList;
 
 public class WorkoutActivity extends AppCompatActivity {
 

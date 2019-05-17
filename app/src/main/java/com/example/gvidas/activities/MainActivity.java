@@ -28,7 +28,8 @@ import java.util.LinkedHashSet;
 public class MainActivity extends AppCompatActivity {
 
     Context context;
-    TextView text;
+    TextView text, txt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         text = (TextView) findViewById(R.id.mainText);
-        setSupportActionBar(toolbar);
 
+        setSupportActionBar(toolbar);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.startWorkout);
@@ -55,29 +56,37 @@ public class MainActivity extends AppCompatActivity {
         if (isFirstRun) {
             //show sign up activity
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-            Toast.makeText(MainActivity.this, "Run only once", Toast.LENGTH_LONG)
-                    .show();
         }
 
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                 .putBoolean("isFirstRun", false).commit();
 
-        ListView lstview=(ListView)findViewById(R.id.workoutListView);
-        lstview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Toast.makeText(context, "An item of the ListView is clicked.", Toast.LENGTH_LONG).show();
-            }
-        });
+        final ListView lstview = (ListView) findViewById(R.id.workoutListView);
+
 
         //String[] items={"1","2","3","4","5"};
-        String[] items=getWorkoutNameAndDate();
-        LstViewAdapter adapter=new LstViewAdapter(this,R.layout.list_item,R.id.txt,items);
+        String[] items = getWorkoutNameAndDate();
+        final String[] IDs = getWorkoutIDS();
+        LstViewAdapter adapter = new LstViewAdapter(this, R.layout.list_item, R.id.txt, items);
         // Bind data to the ListView
         lstview.setAdapter(adapter);
+        lstview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // String item = lstview.getItemAtPosition(position);
+                txt = (TextView) view.findViewById(R.id.txt);
+                String smth = txt.getText().toString() + " " + IDs[position].toString();
+                text.setText(smth);
+                Intent intent = new Intent(MainActivity.this, ShowDataActivity.class);
+                intent.putExtra("workoutID", IDs[position]);
+                startActivity(intent);
+                // Toast.makeText(context, "An item of the ListView is clicked.", Toast.LENGTH_LONG).show();
+            }
+        });
         //getWorkoutNameAndDate();
     }
 
-    public String[] getWorkoutIDS(){
+    public String[] getWorkoutIDS() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         String ids = dbHandler.getAllWorkoutIds();
         String[] splitted = ids.split(" ");
@@ -88,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         return noDuplicatesID;
     }
 
-    public String[] getWorkoutNameAndDate(){
+    public String[] getWorkoutNameAndDate() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         String[] IDS = getWorkoutIDS();
         int count = IDS.length;
@@ -104,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    public void clickMe(View view){
-        Button bt=(Button)view;
-        Toast.makeText(this, "Button "+bt.getText().toString(),Toast.LENGTH_LONG).show();
+    public void clickMe(View view) {
+        Button bt = (Button) view;
+        Toast.makeText(this, "Button " + bt.getText().toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

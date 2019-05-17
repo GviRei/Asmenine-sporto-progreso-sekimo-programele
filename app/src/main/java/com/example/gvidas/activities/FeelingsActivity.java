@@ -55,7 +55,7 @@ public class FeelingsActivity extends AppCompatActivity {
         String str = dbHandler.getWorkoutIDString(workoutID);
 
         //tv.setText(dbHandler.loadWorkout(workoutID));
-        tv.setText(str);
+        tv.setText(String.valueOf(workoutID));
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

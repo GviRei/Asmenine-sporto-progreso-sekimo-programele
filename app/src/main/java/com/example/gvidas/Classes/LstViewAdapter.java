@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class LstViewAdapter extends ArrayAdapter<String> {
     int groupid;
+   // int workoutID;
     String[] item_list;
     ArrayList<String> desc;
     Context context;
@@ -22,6 +23,7 @@ public class LstViewAdapter extends ArrayAdapter<String> {
         this.context=context;
         groupid=vg;
         this.item_list=item_list;
+       // this.workoutID = wid;
 
     }
     static class ViewHolder {
