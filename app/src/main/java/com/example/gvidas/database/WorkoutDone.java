@@ -5,28 +5,24 @@ import java.util.Date;
 public class WorkoutDone {
     public int ID;
     public int randomID;
+    public String exerciseName;
     public int weight;
-    public int tirednessLevel;
-    public int energyLevel;
-    public Date workoutDate;
 
     public WorkoutDone() {}
 
-    public WorkoutDone(int ID, int randomID, int weight, int tirednessLevel, int energyLevel, Date workoutDate) {
+    public WorkoutDone(int ID, int randomID,String exerciseName, int weight) {
         this.ID = ID;
         this.randomID = randomID;
+        this.exerciseName = exerciseName;
         this.weight = weight;
-        this.tirednessLevel = tirednessLevel;
-        this.energyLevel = energyLevel;
-        this.workoutDate = workoutDate;
     }
 
-    public Date getWorkoutDate() {
-        return workoutDate;
+    public String getExerciseName() {
+        return exerciseName;
     }
 
-    public void setWorkoutDate(Date workoutDate) {
-        this.workoutDate = workoutDate;
+    public void setExerciseName(String exerciseName) {
+        this.exerciseName = exerciseName;
     }
 
     public int getID() {
@@ -53,19 +49,4 @@ public class WorkoutDone {
         this.weight = weight;
     }
 
-    public int getTirednessLevel() {
-        return tirednessLevel;
-    }
-
-    public void setTirednessLevel(int tirednessLevel) {
-        this.tirednessLevel = tirednessLevel;
-    }
-
-    public int getEnergyLevel() {
-        return energyLevel;
-    }
-
-    public void setEnergyLevel(int energyLevel) {
-        this.energyLevel = energyLevel;
-    }
 }

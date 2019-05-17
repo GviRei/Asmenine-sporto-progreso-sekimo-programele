@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.example.gvidas.database.MyDBHandler;
 import com.example.gvidas.sportapplication.R;
 
+import java.util.Random;
+
 public class StartWorkoutActivity extends AppCompatActivity {
 
     MyDBHandler dbHandler;
@@ -54,8 +56,11 @@ public class StartWorkoutActivity extends AppCompatActivity {
 
     public void startWorkout(View view) {
         String workoutName = spinner.getSelectedItem().toString();
+        Random randId = new Random();
+        int workoutID = randId.nextInt(1000+1);
         Intent intent = new Intent(StartWorkoutActivity.this, WorkoutActivity.class);
         intent.putExtra("key", workoutName);
+        intent.putExtra("workoutID", workoutID);
         startActivity(intent);
     }
 

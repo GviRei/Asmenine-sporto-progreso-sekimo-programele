@@ -54,6 +54,10 @@
         <activity
             android:name="com.example.gvidas.activities.WorkoutActivity"
             android:label="@string/title_activity_workout"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.FeelingsActivity"
+            android:label="@string/title_activity_feelings"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
