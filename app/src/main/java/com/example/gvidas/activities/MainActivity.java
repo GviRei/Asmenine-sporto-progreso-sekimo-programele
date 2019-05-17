@@ -21,6 +21,7 @@ import com.example.gvidas.sportapplication.R;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -65,11 +66,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         //String[] items={"1","2","3","4","5"};
-        String[] items = getWorkoutNameAndDate();
+        try {
+            String[] items = getWorkoutNameAndDate();
+            LstViewAdapter adapter = new LstViewAdapter(this, R.layout.list_item, R.id.txt, items);
+            lstview.setAdapter(adapter);
+        } catch (Exception e) {
+            return;
+        }
         final String[] IDs = getWorkoutIDS();
-        LstViewAdapter adapter = new LstViewAdapter(this, R.layout.list_item, R.id.txt, items);
+       // LstViewAdapter adapter = new LstViewAdapter(this, R.layout.list_item, R.id.txt, items);
         // Bind data to the ListView
-        lstview.setAdapter(adapter);
+      //  lstview.setAdapter(adapter);
         lstview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 

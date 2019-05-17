@@ -29,7 +29,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String WORKOUT_ID = "WorkoutID";
     public static final String WORKOUT_NAME = "WorkoutName";
     public static final String WORKOUT_EXERCISE = "WorkoutExercise";
-    // public static final String WOKKOUT_DATE = "WorkoutDate";
 
     //Profile table
     public static final String TABLE_PROFILE = "Profile";
@@ -61,13 +60,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String FEELINGS_ID = "matchID";
     public static final String FEELINGS_TIREDNESS = "Tiredness";
     public static final String FEELINGS_ENERGY = "Energy";
+    public static final String FEELINGS_COMMENT = "Comment";
     public static final String FEELINGS_DATE = "Date";
 
-
-    //Relationship table between exercises and workoutdone tables
-    public static final String TABLE_WEXERCISEDONE = "Exercise_WorkoutDone";
-    public static final String WEXERCISE_LINK = "WExerciseID";
-    public static final String WWORKOUTDONE_LINK = "WWorkoutDoneID";
 
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -115,6 +110,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
                     FEELINGS_ID + " INTEGER," +
                     FEELINGS_TIREDNESS + " INTEGER," +
                     FEELINGS_ENERGY + " INTEGER," +
+                    FEELINGS_COMMENT + " TEXT," +
                     FEELINGS_DATE + " TEXT," +
 
                     " FOREIGN KEY (" + FEELINGS_WORKOUTID + ") " +
@@ -231,6 +227,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(FEELINGS_ID, feelings.getID());
         values.put(FEELINGS_TIREDNESS, feelings.getTirednessLevel());
         values.put(FEELINGS_ENERGY, feelings.getEnergyLevel());
+        values.put(FEELINGS_COMMENT, feelings.getComment());
         values.put(FEELINGS_DATE, feelings.getWorkoutDate());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_FEELINGS, null, values);
@@ -272,21 +269,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     }
 
-    //Use this when adding exercise to workout plan
-    public long addExerciseToArray(String name) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(EXERCISE_NAME, name);
-        return db.insert(TABLE_EXERCISE, null, cv);
-    }
-
-
-    public long addWorkout(String name) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(WORKOUT_NAME, name);
-        return db.insert(TABLE_WORKOUT, null, cv);
-    }
 
     //Add profile data to database
     public void addProfile(Profile profile) {
@@ -299,24 +281,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_PROFILE, null, values);
         db.close();
-    }
-
-    public int getWorkoutId() {
-        int id = 0;
-        String query = "SELECT*FROM " + TABLE_TRAININGEXERCISE;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor != null) {
-            try {
-                if (cursor.moveToFirst()) {
-                    id = cursor.getInt(0);
-                }
-            } finally {
-                cursor.close();
-            }
-        }
-        db.close();
-        return id;
     }
 
 
@@ -465,7 +429,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     public String loadAllDataFromWorkout(int id) {
         String result = "";
-        String query = "SELECT w.ExerciseName, w.Weight, f.Tiredness, f.Energy, f.Date FROM " +
+        String query = "SELECT w.ExerciseName, w.Weight, f.Comment FROM " +
                 TABLE_WORKOUTDONE +
                 " AS w " +
                 " JOIN " +
@@ -479,11 +443,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
             String result_0 = cursor.getString(0);
             String result_1 = cursor.getString(1);
             String result_2 = cursor.getString(2);
-            String result_3 = cursor.getString(3);
-            String result_4 = cursor.getString(4);
             result += String.valueOf(result_0) + " " + String.valueOf(result_1) + " " +
-                    String.valueOf(result_2) + " " + String.valueOf(result_3) +
-                    " " + String.valueOf(result_4) + System.getProperty("line.separator");
+                    String.valueOf(result_2)
+                    + System.getProperty("line.separator");
         }
         cursor.close();
         db.close();
@@ -512,23 +474,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
         return result;
     }
 
-    public String loadFeelings() {
-        String result = "";
-        String selectQuery = "SELECT * FROM " + TABLE_FEELINGS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        while (cursor.moveToNext()) {
-            String result_1 = cursor.getString(0);
-            String result_2 = cursor.getString(1);
-            String result_3 = cursor.getString(2);
-            String result_4 = cursor.getString(3);
-            String result_5 = cursor.getString(4);
-            result = String.valueOf(result_1) + " " + String.valueOf(result_2) + " " + String.valueOf(result_3) + " " + String.valueOf(result_4) + " " + String.valueOf(result_5);
-        }
-        cursor.close();
-        db.close();
-        return result;
-    }
 
     public String loadWorkoutPlanOnlyExercises(int id) {
         String result = "";

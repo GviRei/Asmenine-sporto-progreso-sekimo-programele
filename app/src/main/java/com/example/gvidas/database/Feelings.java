@@ -10,14 +10,20 @@ public class Feelings {
     public int ID;
     public int tirednessLevel;
     public int energyLevel;
+    public String comment;
     public String workoutDate;
 
-    public Feelings(int workoutID, int ID, int tirednessLevel, int energyLevel, String workoutDate) {
+    public Feelings(int workoutID, int ID, int tirednessLevel, int energyLevel, String comment, String workoutDate) {
         this.workoutID = workoutID;
         this.ID = ID;
         this.tirednessLevel = tirednessLevel;
         this.energyLevel = energyLevel;
+        this.comment = comment;
         this.workoutDate = workoutDate;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
     public int getWorkoutID() {
