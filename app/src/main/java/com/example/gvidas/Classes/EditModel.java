@@ -1,4 +1,4 @@
-package com.example.gvidas.database;
+package com.example.gvidas.Classes;
 
 public class EditModel {
     private String editTextValue;

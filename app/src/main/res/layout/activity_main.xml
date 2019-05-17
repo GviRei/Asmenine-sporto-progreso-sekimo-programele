@@ -34,5 +34,15 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
+    <ListView
+        android:id="@+id/workoutListView"
+        android:layout_marginTop="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+    </ListView>
+
 
 </android.support.design.widget.CoordinatorLayout>

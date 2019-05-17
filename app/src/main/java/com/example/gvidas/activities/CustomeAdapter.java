@@ -1,7 +1,6 @@
 package com.example.gvidas.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -10,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.example.gvidas.activities.WorkoutActivity;
 
-import com.example.gvidas.database.EditModel;
+import com.example.gvidas.Classes.EditModel;
 import com.example.gvidas.sportapplication.R;
 
 import java.util.ArrayList;

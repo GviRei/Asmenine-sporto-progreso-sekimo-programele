@@ -76,6 +76,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String CREATE_TABLE_WORKOUTDONE =
             "CREATE TABLE " + TABLE_WORKOUTDONE + "(" + WORKOUTDONE_ID +
                     " INTEGER PRIMARY KEY," + WORKOUTDONE_RANDID + " INTEGER," +
+                    
                     WORKOUTDONE_EXERCISENAME + " TEXT," +
                     WORKOUTDONE_WEIGHT + " INTEGER" + " )";
 
@@ -250,6 +251,22 @@ public class MyDBHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return result;
+    }
+
+    public String getAllWorkoutIds(){
+        String result = "";
+        String query = "SELECT*FROM " + TABLE_WORKOUTDONE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query,  null);
+        while (cursor.moveToNext()) {
+            int result_id = cursor.getInt(1);;
+            result += String.valueOf(result_id) + " ";
+        }
+        cursor.close();
+
+        db.close();
+        return result;
+
     }
 
     //Use this when adding exercise to workout plan
