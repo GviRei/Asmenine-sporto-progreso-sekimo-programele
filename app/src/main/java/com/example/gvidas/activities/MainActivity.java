@@ -69,14 +69,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String[] items={"1","2","3","4","5"};
+        //String[] items={"1","2","3","4","5"};
+        String[] items=getWorkoutNameAndDate();
         LstViewAdapter adapter=new LstViewAdapter(this,R.layout.list_item,R.id.txt,items);
         // Bind data to the ListView
         lstview.setAdapter(adapter);
         //getWorkoutNameAndDate();
     }
 
-    public void getWorkoutIDS(){
+    public String[] getWorkoutIDS(){
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         String ids = dbHandler.getAllWorkoutIds();
         String[] splitted = ids.split(" ");
@@ -84,15 +85,24 @@ public class MainActivity extends AppCompatActivity {
         LinkedHashSet<String> array = new LinkedHashSet<String>(Arrays.asList(splitted));
         String[] noDuplicatesID = array.toArray(new String[array.size()]);
         int size = noDuplicatesID.length;
-        String result = "";
-        for(int i = 0; i < noDuplicatesID.length; i++) {
-            result += noDuplicatesID[i] + " ";
-        }
-        text.setText(result);
-
+        return noDuplicatesID;
     }
 
-
+    public String[] getWorkoutNameAndDate(){
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        String[] IDS = getWorkoutIDS();
+        int count = IDS.length;
+        int id = 0;
+        String data = "";
+        String[] result = new String[count];
+        for (int i = 0; i < count; i++) {
+            id = Integer.parseInt(IDS[i]);
+            //text.setText(IDS[i]);
+            data = dbHandler.loadWorkoutDataForListView(id);
+            result[i] = data;
+        }
+        return result;
+    }
 
     public void clickMe(View view){
         Button bt=(Button)view;

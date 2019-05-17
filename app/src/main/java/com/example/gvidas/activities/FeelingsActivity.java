@@ -65,6 +65,8 @@ public class FeelingsActivity extends AppCompatActivity {
 
                 saveFeelingsToDatabase();
                 tv.setText(String.valueOf(i));
+                Intent intent = new Intent(FeelingsActivity.this, MainActivity.class);
+                startActivity(intent);
 
             }
         });

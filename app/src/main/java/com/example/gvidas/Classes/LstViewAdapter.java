@@ -46,7 +46,7 @@ public class LstViewAdapter extends ArrayAdapter<String> {
         // Set text to each TextView of ListView item
         ViewHolder holder = (ViewHolder) rowView.getTag();
         holder.textview.setText(item_list[position]);
-        //holder.button.setText(item_list[position]);
+        holder.button.setText("");
         return rowView;
     }
 

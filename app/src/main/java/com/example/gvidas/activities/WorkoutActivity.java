@@ -79,7 +79,7 @@ public class WorkoutActivity extends AppCompatActivity {
             exerciseName = CustomeAdapter.editModelArrayList.get(i).getChangeTextViewValue();
             weight = Integer.parseInt(CustomeAdapter.editModelArrayList.get(i).getEditTextValue());
             int id = random.nextInt(1000+ 1);
-            workout = new WorkoutDone(id, workoutID, exerciseName, weight);
+            workout = new WorkoutDone(id, workoutID, workoutPlanName, exerciseName, weight);
             dbHandler.saveFinishedWorkout(workout);
         }
     }
