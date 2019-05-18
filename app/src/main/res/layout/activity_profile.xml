@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:alpha="0.8"
+    android:background="@drawable/bg"
     tools:context="com.example.gvidas.activities.ProfileActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -16,9 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
-
-
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
     </android.support.design.widget.AppBarLayout>
@@ -28,49 +28,59 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent = "true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="175dp"
         android:textAlignment="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent">
 
 
         <EditText
             android:id="@+id/profileNameTextField"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="75dp"
-            android:hint="First Name"/>
+            android:fontFamily="sans-serif-black"
+            android:hint="First Name"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="#ffffff" />
 
         <EditText
             android:id="@+id/profileAgeTextField"
-            android:layout_width="125dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_below="@+id/profileNameTextField"
-            android:hint="Age"/>
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-black"
+            android:hint="Age"
+            android:inputType="number"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="#ffffff" />
 
         <EditText
             android:id="@+id/profileHeightTextField"
-            android:layout_width="125dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_below="@+id/profileAgeTextField"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/profileNameTextField"
-            android:layout_toRightOf="@+id/profileAgeTextField"
-            android:hint="Height"/>
+            android:fontFamily="sans-serif-black"
+            android:hint="Height"
+            android:inputType="number"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="#ffffff" />
 
         <EditText
             android:id="@+id/profileWeightTextField"
-            android:layout_width="125dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_below="@+id/profileHeightTextField"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/profileNameTextField"
-            android:layout_toRightOf="@+id/profileHeightTextField"
-            android:hint="Weight"/>
+            android:fontFamily="sans-serif-black"
+            android:hint="Weight"
+            android:inputType="number"
+            android:shadowColor="#ffffff"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="#ffffff" />
 
         <Button
             android:id="@+id/saveProfile"
@@ -78,35 +88,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/profileWeightTextField"
             android:layout_centerHorizontal="true"
-            android:onClick="addProfile"
-            android:text="Save"/>
-        <Button
-            android:id="@+id/loadProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/saveProfile"
-            android:layout_centerHorizontal="true"
-            android:onClick="loadProfile"
-            android:text="Load"/>
-
-        <TextView
-            android:id="@+id/listProfile"
-            android:layout_width="307dp"
-            android:layout_height="166dp"
-            android:layout_below="@+id/loadProfile"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@android:drawable/editbox_background"
-            android:text="Profile"
-            android:textColor="#ff0000"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.674" />
+            android:fontFamily="sans-serif-black"
+            android:text="Save"
+            android:textColor="@color/colorWhite"
+            android:theme="@style/ButtonSave" />
 
 
     </RelativeLayout>
