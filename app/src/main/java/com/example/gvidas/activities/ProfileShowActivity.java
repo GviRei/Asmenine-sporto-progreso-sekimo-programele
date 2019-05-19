@@ -7,14 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gvidas.database.MyDBHandler;
 import com.example.gvidas.sportapplication.R;
 
 public class ProfileShowActivity extends AppCompatActivity {
 
-    TextView name, age, height, weight;
+    EditText name;
+    EditText age ;
+    EditText height;
+    EditText weight ;
+    ImageView edit;
+    Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +31,53 @@ public class ProfileShowActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_show);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        name = (TextView) findViewById(R.id.profileName);
-        age = (TextView) findViewById(R.id.profileAge);
-        height = (TextView) findViewById(R.id.profileHeight);
-        weight = (TextView) findViewById(R.id.profileWeight);
+        name = (EditText) findViewById(R.id.profileName);
+        age = (EditText) findViewById(R.id.profileAge);
+        height = (EditText) findViewById(R.id.profileHeight);
+        weight = (EditText) findViewById(R.id.profileWeight);
+        edit = (ImageView) findViewById(R.id.editImageView);
+        save = (Button) findViewById(R.id.editProfile);
+        //String namas = name.getText().
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadProfile();
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editProfile();
+
+            }
+        });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveProfile(name.getText().toString(), Integer.parseInt(age.getText().toString()),
+                        Integer.parseInt(height.getText().toString()),
+                        Integer.parseInt(weight.getText().toString()) );
+                Toast.makeText(ProfileShowActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        });
+    }
+
+    public void editProfile() {
+        name.setFocusableInTouchMode(true);
+        age.setFocusableInTouchMode(true);
+        height.setFocusableInTouchMode(true);
+        weight.setFocusableInTouchMode(true);
+        name.setFocusable(true);
+        age.setFocusable(true);
+        height.setFocusable(true);
+        weight.setFocusable(true);
+        save.setClickable(true);
+
+    }
+
+
+    public void saveProfile(String name, int age, int height, int weight) {
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        int id = dbHandler.getProfileID();
+        dbHandler.updateProfile(id, name, age, height, weight);
     }
 
     @Override

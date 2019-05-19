@@ -42,7 +42,7 @@
 
 
             <ImageView
-                android:id="@+id/edit"
+                android:id="@+id/editImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -50,10 +50,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:clickable="true"
-
+                android:onClick="editProfile"
                 android:src="@android:drawable/ic_menu_edit" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,6 +62,7 @@
                 android:text=""
                 android:textColor="#fff"
                 android:textSize="24sp"
+                android:focusable="false"
                 android:textStyle="bold" />
 
 
@@ -92,7 +93,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="50dp"
                 android:clickable="true"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 android:text="Age: "
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent" />
@@ -102,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:clickable="true"
@@ -112,35 +113,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/age" />
 
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:textSize="24sp"
-                android:text="Gender: "
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
 
-            <TextView
-                android:id="@+id/gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:textSize="24sp"
-                android:text=""
-                app:layout_constraintLeft_toRightOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/profileWeight" />
 
-            <TextView
+
+            <EditText
                 android:id="@+id/profileHeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -149,10 +126,11 @@
                 android:textSize="24sp"
                 android:layout_marginTop="8dp"
                 android:text=""
+                android:focusable="false"
                 app:layout_constraintLeft_toRightOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/age" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profileWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -161,6 +139,7 @@
                 android:textSize="24sp"
                 android:layout_marginTop="8dp"
                 android:text=""
+                android:focusable="false"
                 app:layout_constraintLeft_toRightOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/profileHeight" />
 
@@ -172,13 +151,13 @@
                 android:layout_margin="5dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="5dp"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 android:text="Weight: "
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profileAge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -187,7 +166,18 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:text=""
+                android:focusable="false"
                 app:layout_constraintLeft_toRightOf="@+id/age" />
+
+            <Button
+                android:id="@+id/editProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22"
+                android:layout_marginLeft="8dp"
+                android:clickable="false"/>
 
         </android.support.constraint.ConstraintLayout>
     </RelativeLayout>

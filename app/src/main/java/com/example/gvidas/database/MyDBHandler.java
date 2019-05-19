@@ -21,8 +21,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String EXERCISE_ID = "ExerciseID";
     public static final String EXERCISE_NAME = "ExerciseName";
     public static final String EXERCISE_CATEGORY = "ExerciseCategory";
-    public static final String EXERCISE_SETS = "ExerciseSets";
-    public static final String EXERCISE_REPS = "ExerciseReps";
 
     //Workout plan table
     public static final String TABLE_WORKOUT = "Workout";
@@ -63,11 +61,28 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String FEELINGS_COMMENT = "Comment";
     public static final String FEELINGS_DATE = "Date";
 
+    public static final String TABLE_VO2MAX = "Vo2Max";
+    public static final String VO2MAX_ID = "Vo2maxID";
+    public static final String VO2MAX_rateMax = "rateMax";
+    public static final String VO2MAX_rateRest = "rateRest";
+    public static final String VO2MAX_vo2max = "vo2max";
+    public static final String VO2MAX_DATE = "dateOfCalculations";
+
+
 
 
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
+
+    public static final String CREATE_TABLE_VO2MAX =
+            "CREATE TABLE " + TABLE_VO2MAX + "(" +
+                    VO2MAX_ID + " INTEGER PRIMARY KEY," +
+                    VO2MAX_rateMax + " DOUBLE," +
+                    VO2MAX_rateRest + " DOUBLE," +
+                    VO2MAX_vo2max + " DOUBLE," +
+                    VO2MAX_DATE + " TEXT" + " )";
+
 
     public static final String CREATE_TABLE_WORKOUTDONE =
             "CREATE TABLE " + TABLE_WORKOUTDONE + "(" + WORKOUTDONE_ID +
@@ -131,12 +146,26 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_TRAININGEXERCISE);
         db.execSQL(CREATE_TABLE_WORKOUTDONE);
         db.execSQL(CREATE_TABLE_FEELINGS);
+        db.execSQL(CREATE_TABLE_VO2MAX);
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+
+    public void addVO2Max(Vo2Max max){
+        ContentValues values = new ContentValues();
+        values.put(VO2MAX_ID, max.getVo2maxID());
+        values.put(VO2MAX_rateMax, max.getRateMax());
+        values.put(VO2MAX_rateRest, max.getRateRest());
+        values.put(VO2MAX_vo2max, max.getVo2max());
+        values.put(VO2MAX_DATE, max.getDateOfCalculations());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_VO2MAX, null, values);
+        db.close();
     }
 
     //Add record to database
@@ -161,6 +190,25 @@ public class MyDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_TRAININGEXERCISE, null, values);
         db.close();
+    }
+
+    public String loadVo2Max(){
+        String result = "";
+        String query = "Select * FROM " + TABLE_VO2MAX;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            int result_0 = cursor.getInt(0);
+            Double result_1 = cursor.getDouble(1);
+            Double result_2 = cursor.getDouble(2);
+            Double result_3 = cursor.getDouble(3);
+            String result_4 = cursor.getString(4);
+
+            result += result_0 + " " + result_1 + " " + result_2 + " " + result_3 + " " + result_4;
+        }
+        cursor.close();
+        db.close();
+        return result;
     }
 
 
@@ -539,34 +587,31 @@ public class MyDBHandler extends SQLiteOpenHelper {
         db.close();
         return result;
     }
-
-    public boolean updateHandler(int ID, String name) {
+    public int getProfileID() {
+        int result = 0;
+        String selectQuery = "SELECT ProfileID FROM " + TABLE_PROFILE;
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues args = new ContentValues();
-        args.put(EXERCISE_ID, ID);
-        args.put(EXERCISE_NAME, name);
-        return db.update(TABLE_EXERCISE, args, EXERCISE_ID + "=" + ID, null) > 0;
-    }
-
-    public List<String> getAllLabels() {
-        List<String> list = new ArrayList<String>();
-
-        // Select All Query
-        String selectQuery = "SELECT  EXERCISE_NAME FROM " + TABLE_EXERCISE;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);//selectQuery,selectedArguments
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                list.add(cursor.getString(1));//adding 2nd column data
-            } while (cursor.moveToNext());
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        while (cursor.moveToNext()) {
+            int result_1 = cursor.getInt(0);
+            result = result_1;
         }
-        // closing connection
         cursor.close();
         db.close();
-        // returning lables
-        return list;
+        return result;
     }
+
+
+    public void updateProfile(int ID, String name, int age, int height, int weight) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues args = new ContentValues();
+        args.put(PROFILE_NAME, name);
+        args.put(PROFILE_AGE, age);
+        args.put(PROFILE_HEIGHT, height);
+        args.put(PROFILE_WEIGHT, weight);
+        db.update(TABLE_PROFILE, args, PROFILE_ID + " = " + ID, null);
+        db.close();
+    }
+
+
 }

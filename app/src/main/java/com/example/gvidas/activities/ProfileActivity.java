@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gvidas.database.Exercise;
 import com.example.gvidas.database.MyDBHandler;
@@ -25,7 +26,8 @@ public class ProfileActivity extends AppCompatActivity {
     TextView list;
     EditText profileName, profileAge, profileWeight, profileHeight;
 
-     Button buttonSave;
+    Button buttonSave;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,42 +44,38 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addProfile();
-                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-                startActivity(intent);
+
             }
         });
-        //Back button
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            //ends activity
-            this.finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void addProfile() {
         Random randId = new Random();
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         // int id = Integer.parseInt(random.getText().toString());
         int id = randId.nextInt(1000 + 1);
-        String name = profileName.getText().toString();
-        int age = Integer.parseInt(profileAge.getText().toString());
-        int height = Integer.parseInt(profileHeight.getText().toString());
-        int weight = Integer.parseInt(profileWeight.getText().toString());
-        Profile profile = new Profile(id, name, age, height, weight);
-        dbHandler.addProfile(profile);
-        profileName.setText("");
-        profileAge.setText("");
-        profileHeight.setText("");
-        profileWeight.setText("");
+        if (profileName.getText().toString().trim().length() == 0 || profileAge.getText().toString().trim().length() == 0
+                || profileHeight.getText().toString().trim().length() == 0 || profileWeight.getText().toString().trim().length() == 0) {
+            Toast.makeText(ProfileActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            String regexString = "^[0-9]*$";
+            if (profileName.getText().toString().trim().matches(regexString)) {
+                Toast.makeText(ProfileActivity.this, "Please enter valid name", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                String name = profileName.getText().toString();
+                int age = Integer.parseInt(profileAge.getText().toString());
+                int height = Integer.parseInt(profileHeight.getText().toString());
+                int weight = Integer.parseInt(profileWeight.getText().toString());
+                Profile profile = new Profile(id, name, age, height, weight);
+                dbHandler.addProfile(profile);
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        }
+
     }
 
     public void loadProfile(View view) {
