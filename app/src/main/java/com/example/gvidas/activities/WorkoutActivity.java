@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,8 +17,6 @@ import com.example.gvidas.database.WorkoutDone;
 import com.example.gvidas.sportapplication.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import static com.example.gvidas.Classes.CustomeAdapter.editModelArrayList;
@@ -30,8 +27,6 @@ public class WorkoutActivity extends AppCompatActivity {
     int workoutID = 0;
     private ListView lv;
     private Button btn;
-
-    // private CustomeAdapter customeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +61,7 @@ public class WorkoutActivity extends AppCompatActivity {
                 intent.putExtra("workoutName", workoutPlanName);
                 saveWorkoutDataToDatabase();
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -101,17 +97,6 @@ public class WorkoutActivity extends AppCompatActivity {
         return list;
     }
 
-    public void getWorkoutPlan() {
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        int workoutPlanId = dbHandler.getWorkoutPlanId(workoutPlanName);
-        String str = dbHandler.loadWorkoutPlanOnlyExercises(workoutPlanId);
-        String[] exercises = str.split("");
-        final List<String> listas = new ArrayList<String>(Arrays.asList(exercises));
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, listas);
-        //listOfExercises.setAdapter(arrayAdapter);
-
-    }
 
     public int getCount() {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);

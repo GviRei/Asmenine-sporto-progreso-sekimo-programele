@@ -36,10 +36,10 @@ public class FeelingsActivity extends AppCompatActivity {
     private EditText tv;
     private TextView mVoiceInputTv;
     private ImageButton mSpeakBtn;
-    public int workoutID;
+    public int workoutID = 0;
     public String workoutName;
     Spinner tirednessSpinner, energySpinner;
-    Button saveButton, loadButton, speechBtn;
+    Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class FeelingsActivity extends AppCompatActivity {
         tirednessSpinner = (Spinner) findViewById(R.id.tirednessSpinner);
         energySpinner = (Spinner) findViewById(R.id.energySpinner);
         saveButton = (Button) findViewById(R.id.saveWorkoutToDatabase);
-        loadButton = (Button) findViewById(R.id.loadWorkoutData);
+        //loadButton = (Button) findViewById(R.id.loadWorkoutData);
         mVoiceInputTv = (TextView) findViewById(R.id.voiceInput);
         mSpeakBtn = (ImageButton) findViewById(R.id.btnSpeak);
         tv = (EditText) findViewById(R.id.tv);
@@ -63,32 +63,19 @@ public class FeelingsActivity extends AppCompatActivity {
             workoutName = extras.getString("workoutName");
         }
         loadSpinners();
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-
-        String str = dbHandler.getWorkoutIDString(workoutID);
-
-        //tv.setText(dbHandler.loadWorkout(workoutID));
-        tv.setText(String.valueOf(workoutID));
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                int i = getCount();
-
-                saveFeelingsToDatabase();
-                tv.setText(String.valueOf(i));
                 Intent intent = new Intent(FeelingsActivity.this, MainActivity.class);
+                saveFeelingsToDatabase();
+
                 startActivity(intent);
+                finish();
 
             }
         });
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadAllDataFromWorkout();
-            }
-        });
+
 
         mSpeakBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -100,6 +87,7 @@ public class FeelingsActivity extends AppCompatActivity {
 
 
     }
+
     private void startVoiceInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -128,10 +116,6 @@ public class FeelingsActivity extends AppCompatActivity {
         }
     }
 
-    public void loadAllDataFromWorkout(){
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        tv.setText(dbHandler.loadAllDataFromWorkout(workoutID));
-    }
 
     public void loadSpinners() {
         String[] tirednessList = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
@@ -153,7 +137,7 @@ public class FeelingsActivity extends AppCompatActivity {
         });
         ArrayAdapter<String> spinnerAdapter2 = new ArrayAdapter<String>(FeelingsActivity.this, android.R.layout.simple_spinner_item, tirednessList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        energySpinner.setAdapter(spinnerAdapter);
+        energySpinner.setAdapter(spinnerAdapter2);
         energySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -183,7 +167,6 @@ public class FeelingsActivity extends AppCompatActivity {
         String[] ids = str.split(" ");
         for (int i = 0; i < count; i++) {
             {
-                //int id = dbHandler.getWorkoutID(workoutID);
                 feelings = new Feelings(Integer.parseInt(ids[i]), workoutID, tiredness, energy, comment, todayDate);
                 dbHandler.addFeelingsToDatabase(feelings);
             }

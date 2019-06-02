@@ -15,13 +15,15 @@ import com.example.gvidas.sportapplication.R;
 public class ShowDataActivity extends AppCompatActivity {
 
     int workoutID;
-    TextView textView;
+    TextView textView, workoutTitle, comments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_data);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         textView = (TextView)findViewById(R.id.showDataText);
+        workoutTitle = (TextView) findViewById(R.id.workoutTitle);
+        comments = (TextView) findViewById(R.id.comment);
         setSupportActionBar(toolbar);
 
         Bundle extras = getIntent().getExtras();
@@ -32,7 +34,11 @@ public class ShowDataActivity extends AppCompatActivity {
 
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         String data = dbHandler.loadAllDataFromWorkout(workoutID);
+        String title = dbHandler.loadWorkoutTitle(workoutID);
+        String comment = dbHandler.loadWorkoutComment(workoutID);
         textView.setText(data);
+        workoutTitle.setText(title);
+        comments.setText(comment);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

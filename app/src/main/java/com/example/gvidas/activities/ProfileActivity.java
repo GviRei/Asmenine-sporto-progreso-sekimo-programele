@@ -2,19 +2,13 @@ package com.example.gvidas.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.gvidas.database.Exercise;
 import com.example.gvidas.database.MyDBHandler;
 import com.example.gvidas.database.Profile;
 import com.example.gvidas.sportapplication.R;
@@ -23,7 +17,6 @@ import java.util.Random;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    TextView list;
     EditText profileName, profileAge, profileWeight, profileHeight;
 
     Button buttonSave;
@@ -34,7 +27,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //list = (TextView) findViewById(R.id.listProfile);
         profileName = (EditText) findViewById(R.id.profileNameTextField);
         profileAge = (EditText) findViewById(R.id.profileAgeTextField);
         profileHeight = (EditText) findViewById(R.id.profileHeightTextField);
@@ -53,7 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
     public void addProfile() {
         Random randId = new Random();
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        // int id = Integer.parseInt(random.getText().toString());
         int id = randId.nextInt(1000 + 1);
         if (profileName.getText().toString().trim().length() == 0 || profileAge.getText().toString().trim().length() == 0
                 || profileHeight.getText().toString().trim().length() == 0 || profileWeight.getText().toString().trim().length() == 0) {
@@ -78,12 +69,4 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void loadProfile(View view) {
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        list.setText(dbHandler.loadProfile());
-        profileName.setText("");
-        profileAge.setText("");
-        profileHeight.setText("");
-        profileWeight.setText("");
-    }
 }

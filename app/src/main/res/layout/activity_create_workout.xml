@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,6 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textAlignment="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentTop="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -34,128 +37,94 @@
         <EditText
             android:id="@+id/workoutNameTextField"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
+            android:layout_height="60dp"
+            android:background="@drawable/rounded_edittext"
             android:layout_alignParentTop="true"
             android:layout_marginTop="75dp"
+            android:textSize="28sp"
+            android:textAlignment="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginRight="10dp"
             android:hint="Workout name" />
+
+        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:id="@+id/saveExercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/workoutNameTextField"
+
+
+            android:onClick="addWorkoutToDatabase"
+            android:text="Set name" />
+        <Spinner
+            android:id="@+id/exerciseSpinner2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="5dp"
+
+            android:layout_below="@id/saveExercise"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
 
         <Spinner
             android:id="@+id/exerciseSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/workoutNameTextField"
+            android:layout_height="60dp"
+            android:layout_marginLeft="5dp"
+
+            android:layout_below="@id/exerciseSpinner2"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown" />
 
-        <Button
-            android:id="@+id/decrease"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/exerciseSpinner"
-            android:layout_toLeftOf="@id/sets"
-            android:onClick="decreaseSets"
-            android:text="-"
-            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/sets"
-            android:layout_width="75dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@id/exerciseSpinner"
-            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/rounded_edittext"
             android:hint="Sets"
+            android:inputType="number"
             android:textAlignment="center"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/increase"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/exerciseSpinner"
-            android:layout_toRightOf="@id/sets"
-            android:onClick="increaseSets"
-            android:text="+"
-            android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/decrease2"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sets"
-            android:layout_centerHorizontal="false"
-            android:layout_toLeftOf="@id/reps"
-            android:text="-"
-            android:textSize="20dp" />
+
 
         <EditText
             android:id="@+id/reps"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_below="@id/sets"
-            android:layout_centerHorizontal="true"
             android:hint="Reps"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/rounded_edittext"
+            android:inputType="number"
+            android:textSize="20sp"
             android:textAlignment="center" />
 
-        <Button
-            android:id="@+id/increase2"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/sets"
-            android:layout_centerHorizontal="false"
-            android:layout_toRightOf="@id/reps"
-            android:onClick="increaseReps"
-            android:text="+"
-            android:textSize="20dp" />
 
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:id="@+id/addExerciseToList"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reps"
-            android:layout_centerHorizontal="false"
+            android:layout_centerHorizontal="true"
             android:onClick="addExerciseToDatabase"
             android:text="Add" />
 
-        <Button
-            android:id="@+id/saveExercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/reps"
-            android:layout_centerHorizontal="true"
-            android:onClick="addWorkoutToDatabase"
-            android:text="Save" />
-
-        <Button
-            android:id="@+id/loadExercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/saveExercise"
-            android:layout_centerHorizontal="true"
-            android:onClick="loadWorkout"
-            android:text="Load" />
-
         <TextView
-            android:id="@+id/workoutList"
-            android:layout_width="307dp"
-            android:layout_height="166dp"
-            android:layout_below="@+id/loadExercise"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@android:drawable/editbox_background"
-            android:text="Workouts list"
-            android:textColor="#ff0000"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.674" />
+            android:id="@+id/addedExercises"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="28sp"
+            android:layout_below="@id/addExerciseToList"
+
+
+
         />
     </RelativeLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

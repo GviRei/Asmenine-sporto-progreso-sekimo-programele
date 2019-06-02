@@ -12,4 +12,5 @@
     <string name="title_activity_workout">WorkoutActivity</string>
     <string name="title_activity_feelings">FeelingsActivity</string>
     <string name="title_activity_show_data">ShowDataActivity</string>
+    <string name="title_activity_check_progress">CheckProgressActivity</string>
 </resources>

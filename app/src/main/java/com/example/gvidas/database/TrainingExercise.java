@@ -6,8 +6,6 @@ public class TrainingExercise {
     public int sets;
     public int reps;
 
-    public TrainingExercise() {
-    }
 
     public TrainingExercise(int wID, int eID, int sets, int reps) {
         this.TWorkoutID = wID;
@@ -18,10 +16,6 @@ public class TrainingExercise {
 
     public int getTWorkoutID() {
         return TWorkoutID;
-    }
-
-    public void setTWorkoutID(int workoutID) {
-        TWorkoutID = workoutID;
     }
 
     public int getSets() {
@@ -44,7 +38,4 @@ public class TrainingExercise {
         return TExerciseID;
     }
 
-    public void setTExerciseID(int exerciseID) {
-        TExerciseID = exerciseID;
-    }
 }

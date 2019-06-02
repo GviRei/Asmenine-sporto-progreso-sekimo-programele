@@ -86,7 +86,6 @@ public class VO2MaxActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     public void load(){
@@ -97,13 +96,11 @@ public class VO2MaxActivity extends AppCompatActivity {
 
 
     public double calculateRateMax(){
-        //double rateMax = 0;
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         String str = dbHandler.loadProfileData();
         String[] splitted = str.split(" ");
         int age = Integer.parseInt(splitted[1]);
         return rateMax = 205.8 - (0.685 * age);
-        //return rateMax;
     }
     public double calculateVo2Max() {
         rateRest = Double.parseDouble(heartRate.getText().toString()) * 10;
@@ -112,12 +109,11 @@ public class VO2MaxActivity extends AppCompatActivity {
 
     public void saveHeartRate(double rest, double max, double vo2){
         Random rand = new Random();
-        int id = rand.nextInt(1000+1);
         Date today = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String todayDate = format.format(today);
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        Vo2Max maxx = new Vo2Max(id, max, rest, vo2, todayDate);
+        Vo2Max maxx = new Vo2Max(max, rest, vo2, todayDate);
         dbHandler.addVO2Max(maxx);
     }
 

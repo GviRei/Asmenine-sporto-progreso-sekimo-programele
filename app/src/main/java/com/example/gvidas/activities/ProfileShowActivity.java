@@ -38,6 +38,7 @@ public class ProfileShowActivity extends AppCompatActivity {
         edit = (ImageView) findViewById(R.id.editImageView);
         save = (Button) findViewById(R.id.editProfile);
         //String namas = name.getText().
+        save.setEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadProfile();
@@ -70,6 +71,7 @@ public class ProfileShowActivity extends AppCompatActivity {
         height.setFocusable(true);
         weight.setFocusable(true);
         save.setClickable(true);
+        save.setEnabled(true);
 
     }
 
@@ -78,6 +80,7 @@ public class ProfileShowActivity extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         int id = dbHandler.getProfileID();
         dbHandler.updateProfile(id, name, age, height, weight);
+
     }
 
     @Override

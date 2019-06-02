@@ -67,6 +67,10 @@
         <activity
             android:name="com.example.gvidas.activities.ShowDataActivity"
             android:label="@string/title_activity_show_data"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.gvidas.activities.CheckProgressActivity"
+            android:label="@string/title_activity_check_progress"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

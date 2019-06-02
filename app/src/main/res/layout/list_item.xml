@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:padding="5dp"
+    tools:showIn="@layout/activity_main">
 
     <TextView
         android:id="@+id/txt"
@@ -11,10 +13,10 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:fontFamily="sans-serif-medium"
-        android:textSize="30dp" />
+        android:textSize="20dp" />
 
     <Button
-        android:id="@+id/bt"
+        android:id="@+id/btDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

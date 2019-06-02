@@ -29,5 +29,10 @@
         android:orderInCategory="104"
         android:title="Measure VO2Max"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/check_progress"
+        android:orderInCategory="105"
+        android:title="Check vo2max progress"
+        app:showAsAction="never" />
 
 </menu>

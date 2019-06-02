@@ -62,6 +62,7 @@ public class StartWorkoutActivity extends AppCompatActivity {
         intent.putExtra("key", workoutName);
         intent.putExtra("workoutID", workoutID);
         startActivity(intent);
+        finish();
     }
 
     public void loadWorkout() {

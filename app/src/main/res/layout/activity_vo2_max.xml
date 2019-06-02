@@ -45,12 +45,13 @@
         <EditText
             android:id="@+id/vo2maxTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_below="@id/vo2maxtitle"
             android:inputType="number"
+            android:background="@drawable/rounded_edittext"
             android:hint="heart rate" />
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:id="@+id/saveVo2Max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,10 +68,10 @@
             android:layout_below="@id/vo2maxTextView"
             android:layout_centerHorizontal="true"
             android:text="Timer"
-            android:textSize="48sp" />
+            android:textSize="36sp" />
 
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:id="@+id/startTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

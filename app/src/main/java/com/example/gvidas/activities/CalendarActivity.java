@@ -25,9 +25,9 @@ public class CalendarActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item .getItemId();
+        int id = item.getItemId();
 
-        if (id == android.R.id.home)  {
+        if (id == android.R.id.home) {
             //ends activity
             this.finish();
         }

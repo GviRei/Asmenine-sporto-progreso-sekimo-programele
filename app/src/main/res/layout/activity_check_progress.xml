@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gvidas.activities.CreateExerciseActivity">
+    tools:context="com.example.gvidas.activities.CheckProgressActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -20,47 +20,40 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_create_exercise" />
+    <include layout="@layout/content_check_progress" />
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginTop="75dp"
         android:textAlignment="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintLeft_toLeftOf="parent">
 
 
-        <EditText
-            android:id="@+id/exerciseNameTextField"
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="450dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:background="@drawable/rounded_edittext"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="75dp"
-            android:hint="Exercise name" />
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp" />
 
-        <Spinner
-            android:id="@+id/exerciseCategoryTextField"
+        <TextView
+            android:id="@+id/chartInfo"
+            android:text="safdsafas"
+            android:textSize="24sp"
+            android:layout_below="@+id/chart"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/rounded_edittext"
-            android:layout_below="@+id/exerciseNameTextField" />
+            android:layout_height="wrap_content" />
 
-        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:id="@+id/saveExercise"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/exerciseCategoryTextField"
-            android:layout_centerHorizontal="true"
-            android:onClick="addExercise"
-            android:text="Save" />
-
-
-
-        />
     </RelativeLayout>
+
+
 </android.support.design.widget.CoordinatorLayout>
+
+
+
+

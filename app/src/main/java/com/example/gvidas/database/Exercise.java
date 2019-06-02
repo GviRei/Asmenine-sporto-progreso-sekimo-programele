@@ -14,9 +14,6 @@ public class Exercise {
         this.exerciseCategory = category;
     }
 
-    public void setExerciseID(int exerciseID) {
-        this.exerciseID = exerciseID;
-    }
 
     public int getExerciseID() {
         return exerciseID;
@@ -26,15 +23,7 @@ public class Exercise {
         return exerciseName;
     }
 
-    public void setExerciseName(String exerciseName) {
-        this.exerciseName = exerciseName;
-    }
-
     public String getExerciseCategory() {
         return exerciseCategory;
-    }
-
-    public void setExerciseCategory(String exerciseCategory) {
-        this.exerciseCategory = exerciseCategory;
     }
 }

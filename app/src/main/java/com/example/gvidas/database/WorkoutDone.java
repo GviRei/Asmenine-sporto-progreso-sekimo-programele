@@ -9,12 +9,13 @@ public class WorkoutDone {
     public String exerciseName;
     public int weight;
 
-    public WorkoutDone() {}
+    public WorkoutDone() {
+    }
 
     public WorkoutDone(int ID, int randomID, String WorkoutDoneName, String exerciseName, int weight) {
         this.ID = ID;
         this.randomID = randomID;
-        this.WorkoutDoneName  = WorkoutDoneName;
+        this.WorkoutDoneName = WorkoutDoneName;
         this.exerciseName = exerciseName;
         this.weight = weight;
     }
@@ -23,16 +24,8 @@ public class WorkoutDone {
         return exerciseName;
     }
 
-    public void setExerciseName(String exerciseName) {
-        this.exerciseName = exerciseName;
-    }
-
     public String getWorkoutDoneName() {
         return WorkoutDoneName;
-    }
-
-    public void setWorkoutDoneName(String workoutDoneName) {
-        WorkoutDoneName = workoutDoneName;
     }
 
     public int getID() {
@@ -45,10 +38,6 @@ public class WorkoutDone {
 
     public int getRandomID() {
         return randomID;
-    }
-
-    public void setRandomID(int randomID) {
-        this.randomID = randomID;
     }
 
     public int getWeight() {

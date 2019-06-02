@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gvidas.database.Exercise;
 import com.example.gvidas.database.ExerciseInPlan;
@@ -28,8 +29,9 @@ import java.util.Random;
 
 public class CreateWorkoutActivity extends AppCompatActivity {
 
-    Spinner spinner;
+    Spinner spinner, spinner2;
     EditText workoutName;
+    TextView info;
     int sets = 0;
     int reps = 0;
     MyDBHandler dbHandler;
@@ -40,14 +42,34 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_workout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         spinner = (Spinner) findViewById(R.id.exerciseSpinner);
+        spinner2 = (Spinner) findViewById(R.id.exerciseSpinner2);
         workoutName = (EditText) findViewById(R.id.workoutNameTextField);
-
+        //info = (TextView)findViewById(R.id.addedExercises);
 
         dbHandler = new MyDBHandler(this, null, null, 1);
-        String[] spinnerLists = dbHandler.loadExercise();
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(CreateWorkoutActivity.this, android.R.layout.simple_spinner_item, spinnerLists);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
+
+
+
+        String[] spinnerLists2 = {"Chest", "Legs", "Biceps", "Triceps", "Back", "Other"};
+       // ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(CreateWorkoutActivity.this, android.R.layout.simple_spinner_item, spinnerLists);
+        ArrayAdapter<String> spinnerAdapter2 = new ArrayAdapter<String>(CreateWorkoutActivity.this, android.R.layout.simple_spinner_item, spinnerLists2);
+       // spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinner.setAdapter(spinnerAdapter);
+        spinner2.setAdapter(spinnerAdapter2);
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               String category = spinner2.getSelectedItem().toString();
+               String[] spinnerLists = dbHandler.loadExercise(category);
+                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(CreateWorkoutActivity.this, android.R.layout.simple_spinner_item, spinnerLists);
+                spinner.setAdapter(spinnerAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -64,57 +86,34 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // spinner.setOnItemSelectedListener(this);
 
     }
 
-
-    public void increaseSets(View view) {
-        sets = sets + 1;
-        ;
-        displaySets(sets);
-    }
-
-    public void decreaseSets(View view) {
-        sets = sets - 1;
-        ;
-        displaySets(sets);
-    }
-
-    public void increaseReps(View view) {
-        reps = reps + 1;
-        ;
-        displayReps(reps);
-    }
-
-    public void decreaseReps(View view) {
-        reps = reps - 1;
-        ;
-        displayReps(reps);
-    }
 
     public int getSets() {
         EditText sets = (EditText) findViewById(R.id.sets);
+        int number = 0;
+        if(sets.getText().toString().trim().length() == 0) {
+            return 0;
+        } else {
         String text = sets.getText().toString();
-        int number = Integer.parseInt(text);
+        number = Integer.parseInt(text);
+        sets.setText("");
+        }
         return number;
     }
 
     public int getReps() {
         EditText reps = (EditText) findViewById(R.id.reps);
-        String text = reps.getText().toString();
-        int number = Integer.parseInt(text);
+        int number = 0;
+        if(reps.getText().toString().trim().length() == 0){
+            return 0;
+        } else {
+            String text = reps.getText().toString();
+            number = Integer.parseInt(text);
+            reps.setText("");
+        }
         return number;
-    }
-
-    public void displaySets(int number) {
-        EditText setsView = (EditText) findViewById(R.id.sets);
-        setsView.setText(String.valueOf(number));
-    }
-
-    public void displayReps(int number) {
-        EditText repsView = (EditText) findViewById(R.id.reps);
-        repsView.setText(String.valueOf(number));
     }
 
 
@@ -129,30 +128,27 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         dbHandler.addWorkout(workout);
     }
 
-    public void loadWorkout(View view) {
-        TextView list = (TextView) findViewById(R.id.workoutList);
-        String wName = workoutName.getText().toString();
-        int workoutPlanId = dbHandler.getWorkoutPlanId(wName);
-        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        /*String str = dbHandler.loadWorkoutPlan(workoutPlanId);
-        String[] splitted = str.split("\\s+");*/
-        list.setText(dbHandler.loadWorkoutPlan(workoutPlanId));
-    }
-
 
     public void addExerciseToDatabase(View view) {
-        TextView list = (TextView) findViewById(R.id.workoutList);
         String exerciseName = "";
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         exerciseName = spinner.getSelectedItem().toString();
+        info = (TextView) findViewById(R.id.addedExercises);
         String wName = workoutName.getText().toString();
         int exerciseId = dbHandler.getExerciseId(exerciseName);
         int workoutPlanId = dbHandler.getWorkoutPlanId(wName);
         int sets = getSets();
         int reps = getReps();
-        TrainingExercise exercise = new TrainingExercise(workoutPlanId, exerciseId, sets, reps);
-        dbHandler.addExerciseToWorkout(exercise);
-        list.setText(String.valueOf(workoutPlanId));
+        if (sets == 0 || reps == 0) {
+            Toast.makeText(CreateWorkoutActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            TrainingExercise exercise = new TrainingExercise(workoutPlanId, exerciseId, sets, reps);
+            dbHandler.addExerciseToWorkout(exercise);
+            String plan = dbHandler.loadWorkoutPlan(workoutPlanId);
+            info.setText(plan);
+        }
+
     }
 
     @Override
@@ -160,7 +156,6 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            //ends activity
             this.finish();
         }
         return super.onOptionsItemSelected(item);

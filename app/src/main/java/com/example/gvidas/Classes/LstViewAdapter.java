@@ -41,7 +41,7 @@ public class LstViewAdapter extends ArrayAdapter<String> {
             rowView= inflater.inflate(groupid, parent, false);
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.textview= (TextView) rowView.findViewById(R.id.txt);
-            viewHolder.button= (Button) rowView.findViewById(R.id.bt);
+            viewHolder.button= (Button) rowView.findViewById(R.id.btDelete);
             rowView.setTag(viewHolder);
 
         }
