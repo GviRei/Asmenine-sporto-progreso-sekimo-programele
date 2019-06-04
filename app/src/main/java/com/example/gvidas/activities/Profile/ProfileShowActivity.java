@@ -1,8 +1,6 @@
-package com.example.gvidas.activities;
+package com.example.gvidas.activities.Profile;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -22,7 +20,8 @@ public class ProfileShowActivity extends AppCompatActivity {
     EditText age ;
     EditText height;
     EditText weight ;
-    ImageView edit;
+    TextView gender;
+    Button edit;
     Button save;
 
     @Override
@@ -35,8 +34,10 @@ public class ProfileShowActivity extends AppCompatActivity {
         age = (EditText) findViewById(R.id.profileAge);
         height = (EditText) findViewById(R.id.profileHeight);
         weight = (EditText) findViewById(R.id.profileWeight);
-        edit = (ImageView) findViewById(R.id.editImageView);
-        save = (Button) findViewById(R.id.editProfile);
+        edit = (Button) findViewById(R.id.editProfile);
+        save = (Button) findViewById(R.id.saveProfile);
+        gender = (TextView) findViewById(R.id.profileGender);
+        setTitle("Profile");
         //String namas = name.getText().
         save.setEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -76,10 +77,14 @@ public class ProfileShowActivity extends AppCompatActivity {
     }
 
 
-    public void saveProfile(String name, int age, int height, int weight) {
+    public void saveProfile(String name2, int age2, int height2, int weight2) {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         int id = dbHandler.getProfileID();
-        dbHandler.updateProfile(id, name, age, height, weight);
+        dbHandler.updateProfile(id, name2, age2, height2, weight2);
+        name.setFocusableInTouchMode(false);
+        age.setFocusableInTouchMode(false);
+        height.setFocusableInTouchMode(false);
+        weight.setFocusableInTouchMode(false);
 
     }
 
@@ -100,8 +105,9 @@ public class ProfileShowActivity extends AppCompatActivity {
         String[] splitted = str.split("\\s+");
         name.setText(splitted[0]);
         age.setText(splitted[1]);
-        height.setText(splitted[2]);
-        weight.setText(splitted[3]);
+        gender.setText(splitted[2]);
+        height.setText(splitted[3]);
+        weight.setText(splitted[4]);
 
     }
 

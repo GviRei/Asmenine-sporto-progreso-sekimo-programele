@@ -4,16 +4,18 @@ public class Profile {
     public int profileID;
     public String name;
     public int age;
+    public String gender;
     public int height;
     public int weight;
 
     public Profile() {
     }
 
-    public Profile(int id, String name, int age, int height, int weight) {
+    public Profile(int id, String name, int age, String gender, int height, int weight) {
         this.profileID = id;
         this.name = name;
         this.age = age;
+        this.gender = gender;
         this.height = height;
         this.weight = weight;
     }
@@ -22,8 +24,8 @@ public class Profile {
         return profileID;
     }
 
-    public void setProfileID(int profileID) {
-        this.profileID = profileID;
+    public String getGender() {
+        return gender;
     }
 
     public String getName() {

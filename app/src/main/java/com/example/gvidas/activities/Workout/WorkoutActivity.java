@@ -1,4 +1,4 @@
-package com.example.gvidas.activities;
+package com.example.gvidas.activities.Workout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,7 +36,7 @@ public class WorkoutActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         btn = (Button) findViewById(R.id.finishWorkout);
         setSupportActionBar(toolbar);
-
+        setTitle("Workout");
         TextView name = (TextView) findViewById(R.id.planName);
 
         Bundle extras = getIntent().getExtras();

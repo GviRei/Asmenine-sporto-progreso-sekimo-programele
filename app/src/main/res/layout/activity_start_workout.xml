@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gvidas.activities.StartWorkoutActivity">
+    tools:context="com.example.gvidas.activities.Workout.StartWorkoutActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -39,47 +39,54 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="100dp"
+            android:textColor="@color/fontColor"
             android:text="Select workout plan"
-            android:textSize="24sp"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
             android:textAlignment="center" />
 
         <Spinner
             android:id="@+id/workoutPlanSpinner"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             android:layout_below="@id/workoutPlanName"
-            android:background="@android:drawable/btn_dropdown"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:spinnerMode="dropdown" />
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_below="@id/workoutPlanSpinner"
+            android:layout_height="wrap_content"
+            android:textColor="@color/fontColor"
+            android:text="WORKOUT PLAN"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textSize="20sp"/>
         <TextView
             android:id="@+id/workoutPlanTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/workoutPlanSpinner"
+            android:layout_below="@+id/title"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@android:drawable/editbox_background"
-            android:text="Exercises"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:textColor="#111111"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.674" />
+            android:textSize="30dp" />
 
-        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        <Button
             android:id="@+id/start"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="65dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="450dp"
             android:layout_marginBottom="50dp"
             android:onClick="startWorkout"
+            android:background="@drawable/buttonstyle"
             android:text="Start"
-
+            android:textColor="@color/colorWhite"
             android:textSize="20sp" />
 
 

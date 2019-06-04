@@ -1,4 +1,4 @@
-package com.example.gvidas.activities;
+package com.example.gvidas.activities.Workout;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gvidas.database.Exercise;
@@ -35,11 +34,14 @@ public class CreateExerciseActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Create Exercise");
+
 
         String[] spinnerLists = {"Chest", "Legs", "Biceps", "Triceps", "Back", "Other"};
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(CreateExerciseActivity.this, android.R.layout.simple_spinner_item, spinnerLists);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         exerciseCategory.setAdapter(spinnerAdapter);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         exerciseCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -53,6 +55,8 @@ public class CreateExerciseActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -78,7 +82,7 @@ public class CreateExerciseActivity extends AppCompatActivity {
         //Toast.makeText(CreateExerciseActivity.this, "Exercise added", Toast.LENGTH_SHORT).show();
         view = toast.getView();
 
-        view.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
+        view.getBackground().setColorFilter(Color.CYAN, PorterDuff.Mode.SRC_ATOP);
         toast.show();
     }
 

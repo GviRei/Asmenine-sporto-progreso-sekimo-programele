@@ -41,15 +41,20 @@ public class LstViewAdapter extends ArrayAdapter<String> {
             rowView= inflater.inflate(groupid, parent, false);
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.textview= (TextView) rowView.findViewById(R.id.txt);
-            viewHolder.button= (Button) rowView.findViewById(R.id.btDelete);
+            //viewHolder.button= (Button) rowView.findViewById(R.id.btDelete);
             rowView.setTag(viewHolder);
 
         }
         // Set text to each TextView of ListView item
         ViewHolder holder = (ViewHolder) rowView.getTag();
         holder.textview.setText(item_list[position]);
-        holder.button.setText("");
+       // holder.button.setText("");
         return rowView;
+    }
+
+    public void deleteView(View view){
+        ViewHolder holder = (ViewHolder) view.getTag();
+
     }
 
 }

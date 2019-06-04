@@ -12,21 +12,23 @@
 
         <TextView
             android:id="@+id/exerciseTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:textSize="18sp"
             android:fontFamily="sans-serif-medium"
             android:textColor="#000" />
 
         <EditText
             android:id="@+id/editid"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:hint="Weight"
             android:inputType="number"
             android:paddingLeft="10dp"
-            android:textColor="#000" />
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:textColor="@color/fontColor" />
 
     </LinearLayout>
 
@@ -35,6 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorAccent" />
+        android:background="@color/colorPrimaryDark" />
 
 </LinearLayout>

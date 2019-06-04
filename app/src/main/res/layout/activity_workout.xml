@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gvidas.activities.WorkoutActivity">
+    tools:context="com.example.gvidas.activities.Workout.WorkoutActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.example.gvidas.activities.WorkoutActivity">
+        tools:context="com.example.gvidas.activities.Workout.WorkoutActivity">
 
         <TextView
             android:id="@+id/planName"
@@ -52,12 +52,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:divider="@null" />
-        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        <Button
             android:id="@+id/finishWorkout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/listView"
+            android:background="@drawable/buttonstyle"
             android:layout_gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
             android:text="Finish" />
 
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.gvidas.activities.WorkoutActivity"
+    tools:context="com.example.gvidas.activities.Workout.WorkoutActivity"
     tools:showIn="@layout/activity_workout">
 
 </android.support.constraint.ConstraintLayout>

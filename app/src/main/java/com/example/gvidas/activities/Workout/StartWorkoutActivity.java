@@ -1,16 +1,13 @@
-package com.example.gvidas.activities;
+package com.example.gvidas.activities.Workout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,7 +26,7 @@ public class StartWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start_workout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         spinner = (Spinner) findViewById(R.id.workoutPlanSpinner);
-
+        setTitle("Start Workout");
 
         dbHandler = new MyDBHandler(this, null, null, 1);
         String[] spinnerLists = dbHandler.loadWorkoutPlan2();

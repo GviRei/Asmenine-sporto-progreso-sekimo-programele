@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.gvidas.activities.VO2MaxActivity"
+    tools:context="com.example.gvidas.activities.Progress.VO2MaxActivity"
     tools:showIn="@layout/activity_vo2_max">
 
 </android.support.constraint.ConstraintLayout>

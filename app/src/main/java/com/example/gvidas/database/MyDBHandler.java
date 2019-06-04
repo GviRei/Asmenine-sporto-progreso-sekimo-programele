@@ -31,6 +31,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
     public static final String PROFILE_ID = "ProfileID";
     public static final String PROFILE_NAME = "Name";
     public static final String PROFILE_AGE = "Age";
+    public static final String PROFILE_GENDER = "Gender";
     public static final String PROFILE_HEIGHT = "Height";
     public static final String PROFILE_WEIGHT = "Weight";
 
@@ -94,7 +95,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_PROFILE =
             "CREATE TABLE " + TABLE_PROFILE + "(" + PROFILE_ID +
-                    " INTEGER PRIMARY KEY," + PROFILE_NAME + " TEXT," + PROFILE_AGE + " INTEGER," + PROFILE_HEIGHT +
+                    " INTEGER PRIMARY KEY," + PROFILE_NAME + " TEXT," + PROFILE_AGE + " INTEGER," + PROFILE_GENDER + " TEXT," + PROFILE_HEIGHT +
                     " INTEGER," + PROFILE_WEIGHT + " INTEGER" + ")";
 
     private static final String CREATE_TABLE_WORKOUT =
@@ -333,6 +334,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         values.put(PROFILE_ID, profile.getProfileID());
         values.put(PROFILE_NAME, profile.getName());
         values.put(PROFILE_AGE, profile.getAge());
+        values.put(PROFILE_GENDER, profile.getGender());
         values.put(PROFILE_HEIGHT, profile.getHeight());
         values.put(PROFILE_WEIGHT, profile.getWeight());
         SQLiteDatabase db = this.getWritableDatabase();
@@ -490,8 +492,29 @@ public class MyDBHandler extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             String result_0 = cursor.getString(0);
             String result_1 = cursor.getString(1);
-            result += String.valueOf(result_0) + " " + String.valueOf(result_1)
+            result += String.valueOf(result_0) + " " + String.valueOf(result_1 + " kg")
                     + System.getProperty("line.separator");
+        }
+        cursor.close();
+        db.close();
+        return result;
+    }
+
+    public String loadTiredness(int id) {
+        String result = "";
+        String query = "SELECT f.Tiredness, f.Energy FROM " +
+                TABLE_WORKOUTDONE +
+                " AS w " +
+                " JOIN " +
+                TABLE_FEELINGS +
+                " AS f " + " ON w.WorkoutDoneID = f.WorkoutID" +
+                " WHERE ? = f.matchID";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(id)}, null);
+        while (cursor.moveToNext()) {
+            String result_0 = cursor.getString(0);
+            String result_1 = cursor.getString(1);
+            result = String.valueOf(result_0) + " " + String.valueOf(result_1 );
         }
         cursor.close();
         db.close();
@@ -594,7 +617,8 @@ public class MyDBHandler extends SQLiteOpenHelper {
             String result_2 = cursor.getString(2);
             String result_3 = cursor.getString(3);
             String result_4 = cursor.getString(4);
-            result = String.valueOf(result_1) + " " + String.valueOf(result_2) + " " + String.valueOf(result_3) + " " + String.valueOf(result_4);
+            String result_5 = cursor.getString(5);
+            result = String.valueOf(result_1) + " " + String.valueOf(result_2) + " " + String.valueOf(result_3) + " " + String.valueOf(result_4) + " " + String.valueOf(result_5);
         }
         cursor.close();
         db.close();

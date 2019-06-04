@@ -1,12 +1,9 @@
-package com.example.gvidas.activities;
+package com.example.gvidas.activities.Workout;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -18,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.gvidas.activities.MainActivity;
 import com.example.gvidas.database.Feelings;
 import com.example.gvidas.database.MyDBHandler;
 import com.example.gvidas.database.WorkoutDone;
@@ -25,10 +23,8 @@ import com.example.gvidas.sportapplication.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.BitSet;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 public class FeelingsActivity extends AppCompatActivity {
 
@@ -47,12 +43,11 @@ public class FeelingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feelings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        setTitle("Finish Workout");
         tirednessSpinner = (Spinner) findViewById(R.id.tirednessSpinner);
         energySpinner = (Spinner) findViewById(R.id.energySpinner);
         saveButton = (Button) findViewById(R.id.saveWorkoutToDatabase);
         //loadButton = (Button) findViewById(R.id.loadWorkoutData);
-        mVoiceInputTv = (TextView) findViewById(R.id.voiceInput);
         mSpeakBtn = (ImageButton) findViewById(R.id.btnSpeak);
         tv = (EditText) findViewById(R.id.tv);
 
@@ -136,7 +131,7 @@ public class FeelingsActivity extends AppCompatActivity {
             }
         });
         ArrayAdapter<String> spinnerAdapter2 = new ArrayAdapter<String>(FeelingsActivity.this, android.R.layout.simple_spinner_item, tirednessList);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         energySpinner.setAdapter(spinnerAdapter2);
         energySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

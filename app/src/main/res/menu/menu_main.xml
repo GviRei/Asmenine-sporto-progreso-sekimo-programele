@@ -34,5 +34,20 @@
         android:orderInCategory="105"
         android:title="Check vo2max progress"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/advancedvo2"
+        android:orderInCategory="106"
+        android:title="Rockport walking fitness test"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/calculate1RM"
+        android:orderInCategory="107"
+        android:title="Bench Press Max"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/stepCounter"
+        android:orderInCategory="107"
+        android:title="Step counter"
+        app:showAsAction="never" />
 
 </menu>

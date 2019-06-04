@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gvidas.activities.CreateExerciseActivity">
+
+    tools:context="com.example.gvidas.activities.Workout.CreateExerciseActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -32,33 +33,60 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <TextView
+            android:id="@+id/exeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-medium"
+            android:text="Enter exercise name"
+            android:textColor="@color/fontColor"
+            android:textSize="24sp" />
+
         <EditText
             android:id="@+id/exerciseNameTextField"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:background="@drawable/rounded_edittext"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="75dp"
+            android:layout_height="65dp"
+            android:layout_below="@id/exeTitle"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:hint="Exercise name" />
+
+        <TextView
+            android:id="@+id/spinnerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exerciseNameTextField"
+            android:layout_centerHorizontal="true"
+
+            android:gravity="center"
+            android:text="Select exercise category"
+            android:textColor="@color/fontColor"
+            android:textSize="24sp" />
 
         <Spinner
             android:id="@+id/exerciseCategoryTextField"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/rounded_edittext"
-            android:layout_below="@+id/exerciseNameTextField" />
+            android:layout_height="65dp"
+            android:layout_below="@+id/spinnerTitle"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:stateListAnimator="@drawable/spinner_sla" />
 
-        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        <Button
             android:id="@+id/saveExercise"
+            android:background="@drawable/buttonstyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/exerciseCategoryTextField"
             android:layout_centerHorizontal="true"
             android:onClick="addExercise"
-            android:text="Save" />
-
+            android:text="Save"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp" />
 
 
         />

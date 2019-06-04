@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/account"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="Profile"/>
+    <item android:id="@+id/progress"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="Check Vo2Max Progress"/>
+    <item android:id="@+id/counter"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="Step counter"/>
+    <item android:id="@+id/createExercise"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="Create exercise"/>
+    <item android:id="@+id/createWorkoutPlan"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="Create workout plan"/>
+    <item android:id="@+id/pressMax"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="Bench press max"/>
+    <item android:id="@+id/simpleVo2"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="Simple Vo2Max test"/>
+    <item android:id="@+id/advancedVo222"
+        android:icon="@drawable/ic_whatshot_black_24dp"
+        android:title="Rock Port Walking Fitness test"/>
+
+
+</menu>

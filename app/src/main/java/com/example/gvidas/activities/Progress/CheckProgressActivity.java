@@ -1,4 +1,4 @@
-package com.example.gvidas.activities;
+package com.example.gvidas.activities.Progress;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -53,6 +54,7 @@ public class CheckProgressActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lineChartView = (LineChartView) findViewById(R.id.chart);
         text = (TextView) findViewById(R.id.chartInfo);
+        setTitle("Check Progress");
 
         displayChart();
 
@@ -117,6 +119,7 @@ public class CheckProgressActivity extends AppCompatActivity {
         v.left = 0;
         v.right = 5;
         lineChartView.setCurrentViewport(v);
+
         int maximumValue = 0;
         String dateOfMax = "";
         int index = 0;
@@ -127,7 +130,7 @@ public class CheckProgressActivity extends AppCompatActivity {
                 dateOfMax = axisData[i];
             }
         }
-        text.setText("Your best Vo2Max result - " + String.valueOf(maximumValue) + " mL/kg/min " + "\n" + " it was calculated on " + dateOfMax);
+        text.setText(Html.fromHtml("Your best Vo2Max result - " + "<b>" + String.valueOf(maximumValue) + "</b>"+ " mL/kg/min " + "<br>" + " it was calculated on " + "<b>" + dateOfMax + "</b>"));
 
     }
 

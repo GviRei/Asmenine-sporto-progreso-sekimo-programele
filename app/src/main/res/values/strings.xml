@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Sport application</string>
+    <string name="Open">Sport application</string>
+    <string name="Close">Sport application</string>
     <string name="action_profile">Profile</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_calendar">CalendarActivity</string>
@@ -13,4 +15,7 @@
     <string name="title_activity_feelings">FeelingsActivity</string>
     <string name="title_activity_show_data">ShowDataActivity</string>
     <string name="title_activity_check_progress">CheckProgressActivity</string>
+    <string name="title_activity_advanced_vo2_max">AdvancedVo2MaxActivity</string>
+    <string name="title_activity_one_rm">OneRMActivity</string>
+    <string name="title_activity_step_counter">StepCounterActivity</string>
 </resources>

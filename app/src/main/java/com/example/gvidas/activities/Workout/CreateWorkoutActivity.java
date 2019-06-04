@@ -1,9 +1,6 @@
-package com.example.gvidas.activities;
+package com.example.gvidas.activities.Workout;
 
-import android.app.Application;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -15,23 +12,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.gvidas.database.Exercise;
-import com.example.gvidas.database.ExerciseInPlan;
 import com.example.gvidas.database.MyDBHandler;
-import com.example.gvidas.database.Profile;
 import com.example.gvidas.database.TrainingExercise;
 import com.example.gvidas.database.Workout;
 import com.example.gvidas.sportapplication.R;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class CreateWorkoutActivity extends AppCompatActivity {
 
     Spinner spinner, spinner2;
     EditText workoutName;
-    TextView info;
+    TextView info, info2;
     int sets = 0;
     int reps = 0;
     MyDBHandler dbHandler;
@@ -45,6 +37,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         spinner2 = (Spinner) findViewById(R.id.exerciseSpinner2);
         workoutName = (EditText) findViewById(R.id.workoutNameTextField);
         //info = (TextView)findViewById(R.id.addedExercises);
+        setTitle("Create Workout Plan");
 
         dbHandler = new MyDBHandler(this, null, null, 1);
 
@@ -53,6 +46,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         String[] spinnerLists2 = {"Chest", "Legs", "Biceps", "Triceps", "Back", "Other"};
        // ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(CreateWorkoutActivity.this, android.R.layout.simple_spinner_item, spinnerLists);
         ArrayAdapter<String> spinnerAdapter2 = new ArrayAdapter<String>(CreateWorkoutActivity.this, android.R.layout.simple_spinner_item, spinnerLists2);
+        spinnerAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
        // spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //spinner.setAdapter(spinnerAdapter);
         spinner2.setAdapter(spinnerAdapter2);
@@ -63,6 +57,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
                String[] spinnerLists = dbHandler.loadExercise(category);
                 ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(CreateWorkoutActivity.this, android.R.layout.simple_spinner_item, spinnerLists);
                 spinner.setAdapter(spinnerAdapter);
+                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             }
 
             @Override
@@ -134,6 +129,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         exerciseName = spinner.getSelectedItem().toString();
         info = (TextView) findViewById(R.id.addedExercises);
+        info2 = (TextView)findViewById(R.id.info2);
         String wName = workoutName.getText().toString();
         int exerciseId = dbHandler.getExerciseId(exerciseName);
         int workoutPlanId = dbHandler.getWorkoutPlanId(wName);
@@ -146,6 +142,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
             TrainingExercise exercise = new TrainingExercise(workoutPlanId, exerciseId, sets, reps);
             dbHandler.addExerciseToWorkout(exercise);
             String plan = dbHandler.loadWorkoutPlan(workoutPlanId);
+            info2.setText(wName);
             info.setText(plan);
         }
 

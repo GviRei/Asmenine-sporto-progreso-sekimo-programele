@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gvidas.activities.CheckProgressActivity">
+    tools:context="com.example.gvidas.activities.Progress.CheckProgressActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -43,8 +43,8 @@
 
         <TextView
             android:id="@+id/chartInfo"
-            android:text="safdsafas"
-            android:textSize="24sp"
+            android:textSize="22sp"
+            android:textColor="@color/fontColor"
             android:layout_below="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

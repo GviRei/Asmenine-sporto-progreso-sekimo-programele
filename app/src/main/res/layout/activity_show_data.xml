@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gvidas.activities.ShowDataActivity">
+    tools:context="com.example.gvidas.activities.Workout.ShowDataActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -26,19 +26,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
         android:textAlignment="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="60dp">
+        app:layout_constraintLeft_toLeftOf="parent">
 
         <TextView
             android:id="@+id/workoutTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:textAllCaps="true"
             android:textAlignment="center"
-            android:textSize="30sp"/>
-
+            android:textAllCaps="true"
+            android:textColor="@color/fontColor"
+            android:textSize="30sp" />
 
 
         <TextView
@@ -46,20 +46,106 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/workoutTitle"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:textColor="#111111"
             android:textSize="30dp" />
+
+
+
+            <RelativeLayout
+                android:id="@+id/layouts"
+                android:layout_below="@id/showDataText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/bar1"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="50dp"
+                    android:max="10"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/custom_progressbar_drawable3"
+                     />
+
+
+                <TextView
+                    android:id="@+id/tv_steps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="68dp"
+
+                    android:text="Tiredness"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <ProgressBar
+                    android:id="@+id/bar23"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_toRightOf="@id/bar1"
+
+                    android:max="10"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/custom_progressbar_drawable2"
+                   />
+
+
+                <TextView
+                    android:id="@+id/tv_steps2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="230dp"
+                    android:text="Energy"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </RelativeLayout>
+
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layouts"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="Workout Description"
+            android:textAllCaps="true"
+            android:textColor="@color/fontColor"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/showDataText"
+            android:layout_below="@id/title"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:textColor="#111111"
             android:textSize="20dp" />
 
+        <Button
+            android:id="@+id/delete"
+            android:background="@drawable/buttonstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/comment"
 
+            android:onClick="deleteWorkout"
+            android:text="Delete"
+            android:textSize="12sp"
+            android:textColor="@color/colorWhite" />
 
-        />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

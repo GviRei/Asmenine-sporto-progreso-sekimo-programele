@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gvidas.activities.CreateWorkoutActivity">
+    tools:context="com.example.gvidas.activities.Workout.CreateWorkoutActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -25,106 +25,163 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:textAlignment="center"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_alignParentTop="true"
+        android:backgroundTint="@color/backgroundPrimaryTransparent"
+        android:backgroundTintMode="screen"
+        android:textAlignment="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <TextView
+            android:id="@+id/exeTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="75dp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-medium"
+            android:text="Enter workout plan name"
+            android:textColor="@color/fontColor"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/workoutNameTextField"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/rounded_edittext"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="75dp"
-            android:textSize="28sp"
-            android:textAlignment="center"
+            android:layout_below="@id/exeTitle"
             android:layout_marginStart="5dp"
             android:layout_marginRight="10dp"
-            android:hint="Workout name" />
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:hint="Workout name"
+            android:textAlignment="center"
+            android:textColor="@color/fontColor"
+            android:textSize="16sp" />
 
-        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        <Button
             android:id="@+id/saveExercise"
-            android:layout_width="match_parent"
+            android:background="@drawable/buttonstyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/workoutNameTextField"
-
-
+            android:layout_centerHorizontal="true"
             android:onClick="addWorkoutToDatabase"
-            android:text="Set name" />
+            android:textSize="12sp"
+            android:text="Set name"
+            android:textColor="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/saveExercise"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-medium"
+            android:text="Select exercise category"
+            android:textColor="@color/fontColor"
+            android:textSize="20sp" />
+
         <Spinner
             android:id="@+id/exerciseSpinner2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginLeft="5dp"
+            android:layout_below="@id/category"
 
-            android:layout_below="@id/saveExercise"
-            android:background="@android:drawable/btn_dropdown"
+            android:layout_marginLeft="5dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:spinnerMode="dropdown" />
+
+        <!--
+        <TextView
+            android:id="@+id/exercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/exerciseSpinner2"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Select exercise"
+            android:textColor="@color/fontColor"
+            android:textSize="24sp" />
+            -->
 
         <Spinner
             android:id="@+id/exerciseSpinner"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginLeft="5dp"
-
             android:layout_below="@id/exerciseSpinner2"
-            android:background="@android:drawable/btn_dropdown"
+
+            android:layout_marginLeft="5dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:spinnerMode="dropdown" />
 
 
         <EditText
             android:id="@+id/sets"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="190dp"
+            android:layout_height="60dp"
             android:layout_below="@id/exerciseSpinner"
             android:layout_marginLeft="5dp"
-            android:background="@drawable/rounded_edittext"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:hint="Sets"
             android:inputType="number"
             android:textAlignment="center"
             android:textSize="20sp" />
 
 
-
-
         <EditText
             android:id="@+id/reps"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/sets"
+            android:layout_width="190dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/exerciseSpinner"
+            android:layout_toRightOf="@id/sets"
+            android:background="@android:drawable/dialog_holo_light_frame"
             android:hint="Reps"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/rounded_edittext"
             android:inputType="number"
-            android:textSize="20sp"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
 
-
-        <Button style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        <Button
             android:id="@+id/addExerciseToList"
-            android:layout_width="match_parent"
+            android:background="@drawable/buttonstyle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reps"
             android:layout_centerHorizontal="true"
+            android:textSize="12sp"
             android:onClick="addExerciseToDatabase"
-            android:text="Add" />
+            android:text="Add"
+            android:textColor="@color/colorWhite" />
 
         <TextView
-            android:id="@+id/addedExercises"
-            android:layout_height="wrap_content"
+            android:id="@+id/info2"
             android:layout_width="match_parent"
-            android:textSize="28sp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_below="@id/addExerciseToList"
+            android:textColor="@color/fontColor"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/addedExercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:layout_below="@id/info2"
+            android:textColor="@color/fontColor"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="18sp"
 
 
-
-        />
+            />
     </RelativeLayout>
 
 </RelativeLayout>

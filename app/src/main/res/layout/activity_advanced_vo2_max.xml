@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gvidas.activities.Progress.AdvancedVo2MaxActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_advanced_vo2_max" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+
+            android:id="@+id/advanced"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="65dp"
+            android:text="Rockport Walking Fitness Test"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/vo2maxtitle22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advanced"
+            android:layout_marginTop="3dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Enter your heart rate"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/fontColor"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/advancedRate"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@id/vo2maxtitle22"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:hint="Heart rate"
+            android:inputType="number"
+            android:textColor="@color/fontColor" />
+
+        <TextView
+            android:id="@+id/minutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advancedRate"
+            android:fontFamily="sans-serif-medium"
+            android:text="Enter your walk time in minutes"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="@color/fontColor"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/advancedMinutes"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@id/minutes"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:hint="Walk time"
+            android:inputType="number"
+            android:textColor="@color/fontColor" />
+
+        <Button
+            android:id="@+id/saveAdvancedVo2Max"
+            android:background="@drawable/buttonstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advancedMinutes"
+            android:layout_alignParentStart="true"
+            android:text="Save"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/rateMonitor"
+            android:background="@drawable/buttonstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advancedMinutes"
+            android:layout_centerHorizontal="true"
+            android:text="Rate"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/timer"
+            android:background="@drawable/buttonstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/advancedMinutes"
+            android:layout_alignParentRight="true"
+
+            android:text="Timer"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/testAdvancedLoad2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/saveAdvancedVo2Max"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginEnd="8dp"
+            android:textColor="#111111"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.674" />
+
+        <TextView
+            android:id="@+id/testAdvancedLoad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/testAdvancedLoad2"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginEnd="8dp"
+            android:textColor="#111111"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.674" />
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
